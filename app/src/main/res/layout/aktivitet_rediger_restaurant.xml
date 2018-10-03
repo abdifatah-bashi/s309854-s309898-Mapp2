@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddRestaurant">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/AppTheme"
+        />
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/rest_name_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="70dp"
+        android:layout_marginBottom="20dp"
+        android:hint="Navn"
+
+        android:textSize="20sp" />
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/rest_address_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="20dp"
+        android:layout_below="@+id/rest_phone_edit"
+        android:hint="Adresse"
+        android:textSize="20sp" />
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/rest_phone_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/rest_name_edit"
+        android:hint="Telefon"
+        android:textSize="20sp" />
+
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/rest_type_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="20dp"
+        android:layout_below="@+id/rest_address_edit"
+        android:hint="Type"
+        android:textSize="20sp" />
+
+
+
+
+
+
+
+</RelativeLayout>

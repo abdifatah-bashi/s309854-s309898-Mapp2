@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddRestaurant">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/AppTheme"
+        />
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/first_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="70dp"
+        android:layout_marginBottom="20dp"
+        android:hint="Fornavn"
+
+        android:textSize="20sp" />
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/last_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="20dp"
+        android:layout_below="@+id/first_name"
+        android:hint="Etternavn"
+        android:textSize="20sp" />
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/rest_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/last_name"
+        android:hint="Telefon"
+        android:textSize="20sp" />
+
+
+
+
+
+
+
+
+
+</RelativeLayout>

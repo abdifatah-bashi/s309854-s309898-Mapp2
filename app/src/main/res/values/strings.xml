@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">s309854-s309898-Mapp2</string>
+    <string name="pluss">+</string>
+    <string name="alert_restaurant_msg">Vil du slette restauranten?</string>
+    <string name="alert_friend_msg">Vil du slette vennen?</string>
+    <string name="ja">Ja</string>
+    <string name="nei">Nei</string>
+
+</resources>
