@@ -26,4 +26,11 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    public void byttTilBestillingAktivitet (View view ){
+        Intent intent = new Intent(this, BestillingAktivitet.class);
+        startActivity(intent);
+
+
+    }
 }

@@ -23,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent"
         />
 
-    <!-- Pluss -->
+    <!-- Restauranter -->
     <Button
         android:id="@+id/restaurant"
         android:layout_width="120dp"
@@ -36,7 +36,7 @@
         android:onClick="byyTilRestaurantAktivitet"
         android:tag="+" />
 
-    <!-- Minus -->
+    <!-- Venner-->
     <Button
         android:id="@+id/friends"
         android:layout_width="120dp"
@@ -48,7 +48,7 @@
         android:onClick="byttTilVennAktivitet"
         android:tag="-" />
 
-    <!-- Dele -->
+    <!-- Bestilling -->
     <Button
         android:id="@+id/message"
         android:layout_width="120dp"
@@ -56,12 +56,12 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/restaurant"
         android:layout_marginStart="66dp"
-        android:background="@drawable/message"
-        android:onClick="changeToGameView"
+        android:background="@drawable/order"
+        android:onClick="byttTilBestillingAktivitet"
         android:tag="/" />
 
 
-    <!-- Gange -->
+    <!-- Instilling -->
     <Button
         android:id="@+id/setting"
         android:layout_width="120dp"

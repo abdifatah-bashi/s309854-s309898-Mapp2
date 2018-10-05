@@ -16,18 +16,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RestaurantAktivitet"
-            android:parentActivityName=".MainActivity"/>
-        <activity android:name=".VennAktivitet"
-            android:parentActivityName=".VennAktivitet"/>
-        <activity android:name=".NyRestaurantAktivitet"
-            android:parentActivityName=".RestaurantAktivitet"/>
-        <activity android:name=".NyVennAktivitet"
-            android:parentActivityName=".VennAktivitet"/>
-        <activity android:name=".RedigerRestaurantAktivitet"
-            android:parentActivityName=".RestaurantAktivitet"/>
-        <activity android:name=".RedigerVennAktivitet"
-            android:parentActivityName=".VennAktivitet"></activity>
+        <activity
+            android:name=".RestaurantAktivitet"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".VennAktivitet"
+            android:parentActivityName=".VennAktivitet" />
+        <activity
+            android:name=".NyRestaurantAktivitet"
+            android:parentActivityName=".RestaurantAktivitet" />
+        <activity
+            android:name=".NyVennAktivitet"
+            android:parentActivityName=".VennAktivitet" />
+        <activity
+            android:name=".RedigerRestaurantAktivitet"
+            android:parentActivityName=".RestaurantAktivitet" />
+        <activity
+            android:name=".RedigerVennAktivitet"
+            android:parentActivityName=".VennAktivitet" />
+        <activity android:name=".BestillingAktivitet"></activity>
     </application>
 
 </manifest>

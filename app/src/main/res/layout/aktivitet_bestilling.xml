@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BestillingAktivitet">
+
+  <android.support.v7.widget.AppCompatTextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Restaurant"
+      android:textSize="25sp"
+      android:layout_margin="15dp"
+
+      android:id="@id/restaurant_label"
+
+      />
+
+  <android.support.v7.widget.AppCompatSpinner
+      android:id="@+id/preSpinner"
+      android:layout_width="match_parent"
+      android:layout_height="60dp"
+      android:layout_alignParentStart="true"
+      android:layout_below="@+id/venner_label"
+      android:background="@android:drawable/btn_dropdown"
+      android:backgroundTint="@color/colorPrimaryDark"
+      android:outlineSpotShadowColor="@color/white"
+      android:popupBackground="@color/white"
+      android:spinnerMode="dropdown"
+      android:textAlignment="center" />
+
+
+  <android.support.v7.widget.AppCompatTextView
+      android:id="@+id/venner_label"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentTop="true"
+      android:layout_alignStart="@+id/restaurant_label"
+      android:layout_marginTop="121dp"
+      android:text="Venn"
+      android:textSize="25sp" />
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/spinner_venner"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="46dp"
+        android:layout_below="@+id/venner_label"
+        android:background="@android:drawable/btn_dropdown"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:outlineSpotShadowColor="@color/white"
+        android:popupBackground="@color/white"
+        android:spinnerMode="dropdown"
+        android:textAlignment="center" />
+
+
+  <TextView
+      android:id="@+id/tvDate"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentStart="true"
+      android:layout_below="@+id/preSpinner"
+      android:hint="Select Date"
+      android:textSize="30sp" />
+
+
+  <android.support.v7.widget.AppCompatButton
+      android:id="@+id/timeBtn"
+      android:layout_width="153dp"
+      android:layout_height="wrap_content"
+      android:layout_alignParentStart="true"
+      android:layout_centerVertical="true"
+      android:layout_marginStart="0dp"
+      android:onClick="setTime"
+      android:text="Set time" />
+
+    <Spinner
+        android:id="@+id/spinner1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/country_arrays"
+        android:prompt="@string/country_prompt" />
+
+    <Spinner
+        android:id="@+id/spinner2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+  <Button
+      android:id="@+id/btnSubmit"
+      android:layout_width="300dp"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      android:layout_alignParentStart="true"
+      android:layout_marginBottom="199dp"
+      android:layout_marginStart="34dp"
+      android:text="Submit" />
+
+
+
+
+
+</RelativeLayout>
