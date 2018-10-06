@@ -9,9 +9,6 @@ public class Bestilling {
     private String dato;
     private String klokkeslett;
 
-
-
-
     public Bestilling(Restaurant restaurant, List<Venn> venner, String dato, String klokkeslett) {
         this.restaurant = restaurant;
         this.venner = venner;

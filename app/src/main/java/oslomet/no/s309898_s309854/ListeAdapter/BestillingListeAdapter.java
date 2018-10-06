@@ -93,16 +93,13 @@ public class BestillingListeAdapter extends ArrayAdapter<Bestilling> {
             holder = (ViewHolder) convertView.getTag();
         }
 
-
-
-
         holder.restaurantName.setText("Restaurant: "+ restaurantNavn);
         holder.tid.setText("Tid: " + tid);
         holder.venner.setText("Venner: \n" + toString(vennNavn));
         return convertView;
     }
 
-    // Hjelp metode
+    // Hjelp metoder
     public String toString(List<String> venner){
         StringBuilder builder = new StringBuilder();
         for(String v : venner) {
