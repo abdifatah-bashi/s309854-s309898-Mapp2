@@ -15,32 +15,179 @@ import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
+
+import oslomet.no.s309898_s309854.modeller.Venn;
+
 public class BestillingAktivitet extends AppCompatActivity {
-    private static Button date, time;
-    private static TextView set_date, set_time;
-    private static final int Date_id = 0;
-    private static final int Time_id = 1;
-    private Button timeBtn;
+
+    private Button tidBtn;
     private Spinner spinner;
-    private Button btnSubmit;
-    private TextView mDisplayDate;
+    private Button datoBtn;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
+
+
+    Button leggVennBtn;
+    TextView valgtVenner;
+    boolean[] checkedItems;
+    ArrayList<Integer> venner = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.aktivitet_bestilling);
 
-        mDisplayDate = (TextView) findViewById(R.id.tvDate);
+        datoBtn =  findViewById(R.id.velg_dato);
+        tidBtn = findViewById(R.id.velg_tid);
+        spinner= findViewById(R.id.spinner_restaurant);
+        velgDato(datoBtn);
+        visRestauranterDropDown(spinner);
 
-        mDisplayDate.setOnClickListener(new View.OnClickListener() {
+        // Venn liste
+        final ArrayList<Venn> liste = new ArrayList<>();
+        liste.add(new Venn("Ross", "Galer ", "45454567"));
+        liste.add(new Venn("Monica", "Galer ", "45454567"));
+        liste.add(new Venn("Joey", "Tribbiani ", "45454567"));
+        liste.add(new Venn("Phoebe ", "buffay ", "45454567"));
+
+
+        ArrayList<String> venner = new ArrayList<>();
+        for (int i = 0; i <liste.size() ; i++) {
+            venner.add(liste.get(i).getFornavn() + " " + liste.get(i).getEtterNavn());
+        }
+        Log.i("Test", Arrays.toString(venner.toArray()));
+        CharSequence[] cs = venner.toArray(new CharSequence[venner.size()]);
+
+
+        visVennerDropDown(cs);
+
+
+
+
+
+    }
+    public void velgTid(View view) {
+
+        Calendar calendar = Calendar.getInstance();
+        int hour = calendar.get(Calendar.HOUR);
+        int minute = calendar.get(Calendar.MINUTE);
+
+        TimePickerDialog timePickerDialog;
+        timePickerDialog = new TimePickerDialog(BestillingAktivitet.this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
+                tidBtn.setText(hourOfDay + ":" + minute);
+
+            }
+        }, hour, minute, false);
+        timePickerDialog.show();
+
+
+    }
+
+
+    public void visRestauranterDropDown(Spinner spinner){
+        String[] restaurantList = new String[]{"Fridays ", "Der Peppern Gror","Gamle Rådhuset","Vulkan Fisk", "Fiskeriet Youngstorget"};
+        List<String> restauranter = Arrays.asList(restaurantList);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+                R.layout.spinner_item, restauranter);
+        dataAdapter.setDropDownViewResource(R.layout.spinner_item);
+        spinner.setAdapter(dataAdapter);
+
+        dataAdapter.setDropDownViewResource(R.layout.spinner_item);
+        spinner.setAdapter(dataAdapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                try{
+
+                }catch (Exception e){
+                    e.printStackTrace();
+
+                }
+                //Log.i("NR", spinner.getSelectedItem().toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+
+    public void visVennerDropDown(final CharSequence [] vennListe){
+        leggVennBtn = (Button) findViewById(R.id.venner_label);
+        valgtVenner = (TextView) findViewById(R.id.tvItemSelected);
+
+
+
+
+
+
+
+        checkedItems = new boolean[vennListe.length];
+
+        leggVennBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(BestillingAktivitet.this);
+                mBuilder.setTitle(R.string.dialog_title);
+                mBuilder.setMultiChoiceItems(vennListe , checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int position, boolean isChecked) {
+                        if(isChecked){
+                            venner.add(position);
+                        }else{
+                            venner.remove((Integer.valueOf(position)));
+                        }
+                    }
+                });
+
+                mBuilder.setCancelable(false);
+                mBuilder.setPositiveButton(R.string.ok_label, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        String item = "";
+                        for (int i = 0; i < venner.size(); i++) {
+                            item = item + vennListe[venner.get(i)];
+                            if (i != venner.size() - 1) {
+                                item = item + ", ";
+                            }
+                        }
+                        valgtVenner.setText("Valgt venner: " + item);
+                    }
+                });
+
+                mBuilder.setNegativeButton(R.string.dismiss_label, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+
+
+
+                AlertDialog mDialog = mBuilder.create();
+                mDialog.show();
+            }
+        });
+
+
+    }
+
+    public void velgDato(final Button datoBtn){
+
+        datoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Calendar cal = Calendar.getInstance();
@@ -65,101 +212,13 @@ public class BestillingAktivitet extends AppCompatActivity {
                 ;
 
                 String date = month + "/" + day + "/" + year;
-                mDisplayDate.setText(date);
+
+                datoBtn.setText(date);
             }
         };
 
 
-        timeBtn = findViewById(R.id.timeBtn);
-
-        spinner= findViewById(R.id.preSpinner);
-        setRestauranterDropDown(spinner);
-
-
-
-
     }
-    public void setTime(View view) {
-
-        Calendar calendar = Calendar.getInstance();
-        int hour = calendar.get(Calendar.HOUR);
-        int minute = calendar.get(Calendar.MINUTE);
-
-        TimePickerDialog timePickerDialog;
-        timePickerDialog = new TimePickerDialog(BestillingAktivitet.this, new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
-                timeBtn.setText(hourOfDay + ":" + minute);
-
-            }
-        }, hour, minute, false);
-        timePickerDialog.show();
-
-
-    }
-
-
-    public void setRestauranterDropDown(Spinner spinner){
-        String[] preferenser = new String[]{"5","10","25"};
-        List<String> prefs = Arrays.asList(preferenser);
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-                R.layout.spinner_item, prefs);
-        dataAdapter.setDropDownViewResource(R.layout.spinner_item);
-        spinner.setAdapter(dataAdapter);
-
-        dataAdapter.setDropDownViewResource(R.layout.spinner_item);
-        spinner.setAdapter(dataAdapter);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                try{
-
-                }catch (Exception e){
-                    e.printStackTrace();
-
-                }
-                //Log.i("NR", spinner.getSelectedItem().toString());
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-    }
-
-    public void setVennertDropDown(Spinner spinner){
-        String[] preferenser = new String[]{"5","10","25"};
-        List<String> prefs = Arrays.asList(preferenser);
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-                R.layout.spinner_item, prefs);
-        dataAdapter.setDropDownViewResource(R.layout.spinner_item);
-        spinner.setAdapter(dataAdapter);
-
-        dataAdapter.setDropDownViewResource(R.layout.spinner_item);
-        spinner.setAdapter(dataAdapter);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                try{
-
-                }catch (Exception e){
-                    e.printStackTrace();
-
-                }
-                //Log.i("NR", spinner.getSelectedItem().toString());
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-    }
-
-
 
 
 

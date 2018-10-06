@@ -2,10 +2,12 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
     </style>
 
     <!--  Alert dialog box style-->
@@ -16,5 +18,13 @@
         <item name="windowMinWidthMajor">900dp</item>
         <item name="windowMinWidthMinor">800dp</item>
     </style>
+
+    <style name="spinner" parent="Widget.AppCompat.Spinner.DropDown.ActionBar">
+
+
+    </style>
+
+
+
 
 </resources>

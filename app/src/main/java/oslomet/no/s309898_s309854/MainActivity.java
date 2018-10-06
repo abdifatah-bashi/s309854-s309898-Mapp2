@@ -33,4 +33,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    public void byttTilInstillingAktivitet (View view ){
+        Intent intent = new Intent(this, InstillingAktivitet.class);
+        startActivity(intent);
+
+    }
 }

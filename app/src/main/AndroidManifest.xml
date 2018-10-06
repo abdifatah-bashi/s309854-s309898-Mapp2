@@ -34,7 +34,8 @@
         <activity
             android:name=".RedigerVennAktivitet"
             android:parentActivityName=".VennAktivitet" />
-        <activity android:name=".BestillingAktivitet"></activity>
+        <activity android:name=".BestillingAktivitet" />
+        <activity android:name=".InstillingAktivitet"></activity>
     </application>
 
 </manifest>

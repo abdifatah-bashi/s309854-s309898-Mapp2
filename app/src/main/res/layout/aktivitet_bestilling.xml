@@ -9,95 +9,152 @@
   <android.support.v7.widget.AppCompatTextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="Restaurant"
-      android:textSize="25sp"
-      android:layout_margin="15dp"
-
-      android:id="@id/restaurant_label"
+      android:layout_alignParentStart="true"
+      android:layout_alignParentTop="true"
+      android:layout_marginBottom="15dp"
+      android:layout_marginTop="35dp"
+      android:text="Velg Restaurant"
+      android:textSize="18sp"
+      android:textStyle="bold"
+      android:textColor="@color/blue"
+     android:id="@id/restaurant_label"
 
       />
 
   <android.support.v7.widget.AppCompatSpinner
-      android:id="@+id/preSpinner"
+      android:id="@+id/spinner_restaurant"
       android:layout_width="match_parent"
       android:layout_height="60dp"
-      android:layout_alignParentStart="true"
-      android:layout_below="@+id/venner_label"
-      android:background="@android:drawable/btn_dropdown"
-      android:backgroundTint="@color/colorPrimaryDark"
+      android:layout_below="@+id/restaurant_label"
+      android:layout_marginBottom="15dp"
       android:outlineSpotShadowColor="@color/white"
-      android:popupBackground="@color/white"
       android:spinnerMode="dropdown"
+      style="@style/spinner"
+
       android:textAlignment="center" />
 
 
-  <android.support.v7.widget.AppCompatTextView
-      android:id="@+id/venner_label"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignParentTop="true"
-      android:layout_alignStart="@+id/restaurant_label"
-      android:layout_marginTop="121dp"
-      android:text="Venn"
-      android:textSize="25sp" />
-
-    <android.support.v7.widget.AppCompatSpinner
-        android:id="@+id/spinner_venner"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="46dp"
-        android:layout_below="@+id/venner_label"
-        android:background="@android:drawable/btn_dropdown"
-        android:backgroundTint="@color/colorPrimaryDark"
-        android:outlineSpotShadowColor="@color/white"
-        android:popupBackground="@color/white"
-        android:spinnerMode="dropdown"
-        android:textAlignment="center" />
-
-
-  <TextView
-      android:id="@+id/tvDate"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignParentStart="true"
-      android:layout_below="@+id/preSpinner"
-      android:hint="Select Date"
-      android:textSize="30sp" />
 
 
   <android.support.v7.widget.AppCompatButton
-      android:id="@+id/timeBtn"
-      android:layout_width="153dp"
+      android:id="@+id/venner_label"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_alignParentStart="true"
       android:layout_centerVertical="true"
-      android:layout_marginStart="0dp"
-      android:onClick="setTime"
-      android:text="Set time" />
+      android:layout_below="@+id/spinner_restaurant"
+      android:backgroundTint="@color/blue"
+      android:textColor="@color/white"
+      android:layout_marginBottom="15dp"
+      android:textStyle="bold"
+      android:text="@string/velg_venner" />
 
-    <Spinner
-        android:id="@+id/spinner1"
-        android:layout_width="match_parent"
+
+
+  <TextView
+      android:id="@+id/tvItemSelected"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:gravity="center"
+      android:layout_marginBottom="15dp"
+      android:layout_below="@id/venner_label"
+      android:textColor="@color/blue"
+      android:textSize="18sp"
+      android:text="Valgt venner: "
+      android:textStyle="italic" />
+
+
+  <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:id="@+id/dato_layout"
+      android:layout_below="@id/tvItemSelected"
+      android:weightSum="100">
+
+    <TextView
+        android:id="@+id/dato"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:entries="@array/country_arrays"
-        android:prompt="@string/country_prompt" />
 
-    <Spinner
-        android:id="@+id/spinner2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+
+        android:layout_marginBottom="15dp"
+        android:textColor="@color/blue"
+        android:textSize="20sp"
+        android:text="Dato:"
+        android:layout_weight="70"
+        android:textStyle="bold" />
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/velg_dato"
+        android:layout_width="153dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/blue"
+
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+         android:layout_weight="30"
+
+        android:layout_marginBottom="15dp"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:text="Velg Dato" />
+
+  </LinearLayout>
+
+  <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:id="@+id/tid_layout"
+      android:layout_below="@id/dato_layout">
+
+    <TextView
+        android:id="@+id/tid"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+
+        android:layout_marginBottom="15dp"
+        android:textColor="@color/blue"
+        android:textSize="20sp"
+        android:text="TID:"
+        android:layout_weight="70"
+        android:textStyle="bold" />
+
+    <android.support.v7.widget.AppCompatButton
+
+        android:id="@+id/velg_tid"
+        android:layout_width="153dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:onClick="velgTid"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:backgroundTint="@color/blue"
+        android:textColorLink="@color/white"
+
+
+
+        android:layout_marginBottom="15dp"
+        android:text="Velg tid" />
+
+
+  </LinearLayout>
+
+
+
+
 
   <Button
-      android:id="@+id/btnSubmit"
-      android:layout_width="300dp"
-      android:layout_height="wrap_content"
-      android:layout_alignParentBottom="true"
-      android:layout_alignParentStart="true"
-      android:layout_marginBottom="199dp"
-      android:layout_marginStart="34dp"
-      android:text="Submit" />
+      android:id="@+id/bestillingBtn"
+      android:layout_width="match_parent"
+      android:layout_height="50dp"
+      android:background="@drawable/quitbutton"
+      android:layout_below="@+id/tid_layout"
+      android:text="Bestill"
+
+      android:textColor="#FFFFFF"
+      android:textSize="30dp" />
+
+
 
 
 
