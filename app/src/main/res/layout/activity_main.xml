@@ -26,12 +26,10 @@
     <!-- Restauranter -->
     <Button
         android:id="@+id/restaurant"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="140dp"
+        android:layout_height="125dp"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
-
-        android:layout_marginStart="58dp"
         android:background="@drawable/restaurant"
         android:onClick="byyTilRestaurantAktivitet"
         android:tag="+" />
@@ -39,8 +37,8 @@
     <!-- Venner-->
     <Button
         android:id="@+id/venner"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="140dp"
+        android:layout_height="125dp"
         android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/restaurant"
         android:layout_marginEnd="48dp"
@@ -48,19 +46,13 @@
         android:onClick="byttTilVennAktivitet"
         android:tag="-" />
 
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="2dp"
-        android:background="@color/blue"/>
-
     <!-- Bestilling -->
     <Button
         android:id="@+id/bestilling"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="140dp"
+        android:layout_height="125dp"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/restaurant"
-        android:layout_marginStart="66dp"
         android:background="@drawable/order"
         android:onClick="byttTilBestillingAktivitet"
         android:tag="/" />
@@ -69,8 +61,8 @@
     <!-- Instilling -->
     <Button
         android:id="@+id/instilling"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="140dp"
+        android:layout_height="125dp"
         android:layout_alignStart="@+id/venner"
         android:layout_below="@+id/restaurant"
         android:background="@drawable/setting"

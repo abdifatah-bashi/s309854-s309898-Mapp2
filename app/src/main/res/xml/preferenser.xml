@@ -4,17 +4,20 @@
 
     <SwitchPreference android:title="@string/turn_app_on_off_title"
         android:key="switch_on_off"
+        android:textSize="20sp"
         android:defaultValue="false" />
 
     <oslomet.no.s309898_s309854.TimePicker
         android:key="set_time"
         android:showDefault="true"
         android:layout="@layout/custom_preferenser"
-        android:title="@string/change_time_title" />
+        android:title="@string/change_time_title"
+          />
 
     <EditTextPreference android:title="@string/change_default_message_title"
         android:key="endre_melding"
         android:textColor="@android:color/black"
+        android:textSize="20sp"
         android:textCursorDrawable="@drawable/custom_cursor_black" />
 
 </PreferenceScreen>
