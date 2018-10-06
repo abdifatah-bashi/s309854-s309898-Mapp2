@@ -14,37 +14,47 @@
         />
 
     <android.support.v7.widget.AppCompatEditText
-        android:id="@+id/first_name"
+        android:id="@+id/rest_navn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="70dp"
         android:layout_marginBottom="20dp"
-        android:hint="Fornavn"
+        android:hint="Navn"
 
         android:textSize="20sp" />
 
     <android.support.v7.widget.AppCompatEditText
-        android:id="@+id/last_name"
+        android:id="@+id/rest_adrese"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="20dp"
-        android:layout_below="@+id/first_name"
-        android:hint="Etternavn"
+        android:layout_below="@+id/rest_navn"
+        android:hint="Adresse"
         android:textSize="20sp" />
 
     <android.support.v7.widget.AppCompatEditText
-        android:id="@+id/rest_phone"
+        android:id="@+id/rest_telefon"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/last_name"
+        android:layout_below="@+id/rest_adrese"
         android:hint="Telefon"
         android:textSize="20sp" />
 
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/rest_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="20dp"
+        android:layout_below="@+id/rest_telefon"
+        android:hint="Type"
+        android:textSize="20sp" />
 
 
 

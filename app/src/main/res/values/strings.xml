@@ -5,7 +5,6 @@
     <string name="alert_friend_msg">Vil du slette vennen?</string>
 
 
-
     <string name="action_settings">Settings</string>
     <string name="time_picker_example">Time Picker Example</string>
     <string name="time_pick">Pick the time and press save button</string>
@@ -17,7 +16,6 @@
     <string name="ok_label">Velg</string>
     <string name="dismiss_label">Avbryt</string>
     <string name="velg_venner">Velg venner</string>
-
 
 
     <string name="studenter">Studenter</string>
