@@ -6,17 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".BestillingAktivitet">
 
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/AppTheme"
+        />
     <android.support.v7.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginBottom="15dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="70dp"
         android:text="Velg Restaurant"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:textColor="@color/blue"
         android:id="@id/restaurant_label"
 
         />
@@ -29,9 +36,9 @@
         android:layout_marginBottom="15dp"
         android:outlineSpotShadowColor="@color/white"
         android:spinnerMode="dropdown"
-        style="@style/spinner"
-
         android:textAlignment="center" />
+
+
 
 
 
@@ -42,12 +49,14 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
+        android:backgroundTintMode="multiply"
         android:layout_below="@+id/spinner_restaurant"
-        android:backgroundTint="@color/blue"
-        android:textColor="@color/white"
+        android:textColor="@color/text_color"
         android:layout_marginBottom="15dp"
         android:textStyle="bold"
         android:text="@string/velg_venner" />
+
+
 
 
 
@@ -58,7 +67,6 @@
         android:gravity="center"
         android:layout_marginBottom="15dp"
         android:layout_below="@id/venner_label"
-        android:textColor="@color/blue"
         android:textSize="18sp"
         android:text="Valgt venner: "
         android:textStyle="italic" />
@@ -78,7 +86,6 @@
 
 
             android:layout_marginBottom="15dp"
-            android:textColor="@color/blue"
             android:textSize="20sp"
             android:text="Dato:"
             android:layout_weight="70"
@@ -87,14 +94,12 @@
             android:id="@+id/velg_dato"
             android:layout_width="153dp"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/blue"
-
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:layout_weight="30"
 
             android:layout_marginBottom="15dp"
-            android:textColor="@color/white"
+            android:textColor="@color/text_color"
             android:textSize="20sp"
             android:text="Velg Dato" />
 
@@ -112,7 +117,6 @@
             android:layout_height="wrap_content"
 
             android:layout_marginBottom="15dp"
-            android:textColor="@color/blue"
             android:textSize="20sp"
             android:text="TID:"
             android:layout_weight="70"
@@ -126,10 +130,9 @@
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:onClick="velgTid"
-            android:textColor="@color/white"
+            android:textColor="@color/text_color"
             android:textSize="20sp"
-            android:backgroundTint="@color/blue"
-            android:textColorLink="@color/white"
+            android:textColorLink="@color/text_color"
 
 
 

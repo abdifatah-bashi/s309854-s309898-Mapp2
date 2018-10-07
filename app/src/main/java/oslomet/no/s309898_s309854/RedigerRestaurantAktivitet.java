@@ -35,6 +35,7 @@ public class RedigerRestaurantAktivitet extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+
     }
 
     @Override

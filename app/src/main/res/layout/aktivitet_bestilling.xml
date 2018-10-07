@@ -4,24 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BestillingListAktivitet">
+    tools:context=".BestillingAktivitet">
 
-  <android.support.v7.widget.AppCompatTextView
+  <android.support.v7.widget.Toolbar
+      android:id="@+id/toolbar"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:id="@+id/tittel"
-      android:text="Bestillinger:"
-      android:layout_marginTop="20dp"
-      android:textColor="@color/blue"
-      android:textSize="20sp"
-      android:textStyle="bold"
+      android:background="?attr/colorPrimary"
+      app:popupTheme="@style/AppTheme"
       />
+
+
 
   <ListView
       android:id="@+id/bestilling_list_view"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:layout_below="@+id/tittel"
+      android:layout_marginTop="50dp"
       />
 
   <Button

@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -40,6 +41,14 @@ public class BestillingAktivitet extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.aktivitet_bestilling);
 
+        //Toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Bestillinger");
+        toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         listView = findViewById(R.id.bestilling_list_view);
 
         // Restaurant
@@ -66,6 +75,9 @@ public class BestillingAktivitet extends AppCompatActivity {
         listView.setAdapter(adapter);
 
 
+
+
+
     }
 
 
@@ -74,6 +86,8 @@ public class BestillingAktivitet extends AppCompatActivity {
         startActivity(intent);
 
     }
+
+
 
 
 

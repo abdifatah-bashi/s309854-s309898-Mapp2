@@ -4,10 +4,12 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -46,6 +48,8 @@ public class NyBestillingAktivitet extends AppCompatActivity {
         datoBtn =  findViewById(R.id.velg_dato);
         tidBtn = findViewById(R.id.velg_tid);
         spinner= findViewById(R.id.spinner_restaurant);
+        spinner.getBackground().setColorFilter(getResources().getColor(R.color.red), PorterDuff.Mode.SRC_ATOP);
+
         velgDato(datoBtn);
         visRestauranterDropDown(spinner);
 
@@ -63,9 +67,15 @@ public class NyBestillingAktivitet extends AppCompatActivity {
         }
         Log.i("Test", Arrays.toString(venner.toArray()));
         CharSequence[] cs = venner.toArray(new CharSequence[venner.size()]);
+         visVennerDropDown(cs);
 
-
-        visVennerDropDown(cs);
+        //Toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Legg til ny bestilling");
+        toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 
     }
@@ -85,7 +95,7 @@ public class NyBestillingAktivitet extends AppCompatActivity {
         leggVennBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder mBuilder = new AlertDialog.Builder(NyBestillingAktivitet.this);
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(NyBestillingAktivitet.this, R.style.AlertDialog);
                 mBuilder.setTitle(R.string.dialog_title);
                 mBuilder.setMultiChoiceItems(vennListe , checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
@@ -99,6 +109,7 @@ public class NyBestillingAktivitet extends AppCompatActivity {
                 });
 
                 mBuilder.setCancelable(false);
+
                 mBuilder.setPositiveButton(R.string.ok_label, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int which) {
@@ -113,6 +124,7 @@ public class NyBestillingAktivitet extends AppCompatActivity {
                     }
                 });
 
+
                 mBuilder.setNegativeButton(R.string.dismiss_label, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -123,6 +135,7 @@ public class NyBestillingAktivitet extends AppCompatActivity {
 
 
                 AlertDialog mDialog = mBuilder.create();
+
                 mDialog.show();
             }
         });
