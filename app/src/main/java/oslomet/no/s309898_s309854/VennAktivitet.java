@@ -18,19 +18,23 @@ public class VennAktivitet extends AppCompatActivity {
 
     Button addFriendBtn;
     ListView listView;
+
+    DatabaseHelper databaseHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.aktivitet_venn);
 
+        databaseHelper=new DatabaseHelper(this);
         addFriendBtn = findViewById(R.id.addFriendBtn);
 
         listView = findViewById(R.id.restListView);
         ArrayList<Venn> venner = new ArrayList<>();
-        venner.add(new Venn("Monica", "Galer ", "45454545"));
+       /* venner.add(new Venn("Monica", "Galer ", "45454545"));
         venner.add(new Venn("Chandler", "Bing ", "45454545"));
         venner.add(new Venn("Ross", "Galer ", "45454545"));
-
+*/
+       venner = (ArrayList)databaseHelper.hentAlleVenner();
 
         VennListeAdapter adapter = new VennListeAdapter(this, R.layout.venn_liste_view, venner);
         listView.setAdapter(adapter);

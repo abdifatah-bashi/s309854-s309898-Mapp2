@@ -53,7 +53,7 @@ public class VennListeAdapter extends ArrayAdapter<Venn> {
     public View getView(final int position, View convertView, ViewGroup parent) {
 
         String fornavn = getItem(position).getFornavn();
-        String etternavn =getItem(position).getEtterNavn() ;
+        String etternavn =getItem(position).getEtternavn() ;
         String telefon =getItem(position).getTelefon() ;
 
 
@@ -84,9 +84,10 @@ public class VennListeAdapter extends ArrayAdapter<Venn> {
         editBtn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View vew){
                 Intent intent = new Intent(context, RedigerVennAktivitet.class);
-                intent.putExtra("firstName", friendsArrayList.get(position).getFornavn());
-                intent.putExtra("lastName", friendsArrayList.get(position).getEtterNavn());
-                intent.putExtra("phone", friendsArrayList.get(position).getTelefon());
+                intent.putExtra("id", friendsArrayList.get(position).getId());
+                intent.putExtra("fornavn", friendsArrayList.get(position).getFornavn());
+                intent.putExtra("etternavn", friendsArrayList.get(position).getEtternavn());
+                intent.putExtra("telefon", friendsArrayList.get(position).getTelefon());
                 context.startActivity(intent);
                 notifyDataSetChanged();
 
@@ -106,7 +107,7 @@ public class VennListeAdapter extends ArrayAdapter<Venn> {
         });
 
 
-        holder.friendName.setText(freind.getFornavn() + " " + freind.getEtterNavn());
+        holder.friendName.setText(freind.getFornavn() + " " + freind.getEtternavn());
         return convertView;
     }
 

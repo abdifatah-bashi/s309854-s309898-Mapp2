@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.renderscript.Sampler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -18,8 +19,10 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import oslomet.no.s309898_s309854.DatabaseHelper;
 import oslomet.no.s309898_s309854.R;
 import oslomet.no.s309898_s309854.RedigerRestaurantAktivitet;
+import oslomet.no.s309898_s309854.RestaurantAktivitet;
 import oslomet.no.s309898_s309854.modeller.Restaurant;
 
 
@@ -29,7 +32,7 @@ public class RestaurantListeAdapter extends ArrayAdapter<Restaurant> {
     private int resource;
     private ArrayList<Restaurant> restaurantArrayList;
 
-
+    DatabaseHelper databaseHelper;
 
 
     /**
@@ -57,6 +60,8 @@ public class RestaurantListeAdapter extends ArrayAdapter<Restaurant> {
 
         String name = getItem(position).getNavn();
 
+       // Intent intent = new Intent(context, RestaurantAktivitet.class);
+        //intent.putExtra("Id", restaurantArrayList.get(position).getID());
 
         //Create statistic object
         final Restaurant restaurant = new Restaurant(name);
@@ -85,9 +90,10 @@ public class RestaurantListeAdapter extends ArrayAdapter<Restaurant> {
         editBtn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View vew){
                 Intent intent = new Intent(context, RedigerRestaurantAktivitet.class);
-                intent.putExtra("name", restaurantArrayList.get(position).getNavn());
-                intent.putExtra("address", restaurantArrayList.get(position).getAdresse());
-                intent.putExtra("phone", restaurantArrayList.get(position).getTelefon());
+                intent.putExtra("Id", restaurantArrayList.get(position).getID());
+                intent.putExtra("navn", restaurantArrayList.get(position).getNavn());
+                intent.putExtra("adress", restaurantArrayList.get(position).getAdresse());
+                intent.putExtra("telefon", restaurantArrayList.get(position).getTelefon());
                 intent.putExtra("type", restaurantArrayList.get(position).getType());
                 context.startActivity(intent);
                 notifyDataSetChanged();
@@ -135,6 +141,9 @@ public class RestaurantListeAdapter extends ArrayAdapter<Restaurant> {
                 .setPositiveButton(R.string.ja, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(context, "JA", Toast.LENGTH_LONG).show();
+                        /*Intent intent = new Intent(context, RestaurantAktivitet.class);
+                        int id =Integer.valueOf(intent.getStringExtra("Id"));
+                         databaseHelper.slettRestaurant(id);*/
 
 
                     }

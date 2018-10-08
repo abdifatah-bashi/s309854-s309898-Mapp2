@@ -59,7 +59,7 @@ public class NyBestillingAktivitet extends AppCompatActivity {
 
         ArrayList<String> venner = new ArrayList<>();
         for (int i = 0; i <liste.size() ; i++) {
-            venner.add(liste.get(i).getFornavn() + " " + liste.get(i).getEtterNavn());
+            venner.add(liste.get(i).getFornavn() + " " + liste.get(i).getEtternavn());
         }
         Log.i("Test", Arrays.toString(venner.toArray()));
         CharSequence[] cs = venner.toArray(new CharSequence[venner.size()]);

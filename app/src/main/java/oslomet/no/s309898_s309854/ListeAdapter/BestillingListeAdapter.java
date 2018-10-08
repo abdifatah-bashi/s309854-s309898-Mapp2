@@ -64,7 +64,7 @@ public class BestillingListeAdapter extends ArrayAdapter<Bestilling> {
         List<Venn> venner  = getItem(position).getVenner();
         List<String> vennNavn = new ArrayList<>();
         for (int i = 0; i <venner.size() ; i++) {
-            vennNavn.add(venner.get(i).getFornavn() + " " + venner.get(i).getEtterNavn() );
+            vennNavn.add(venner.get(i).getFornavn() + " " + venner.get(i).getEtternavn() );
         }
 
 

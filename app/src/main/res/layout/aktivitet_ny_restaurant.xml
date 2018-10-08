@@ -9,7 +9,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
+        android:background="@color/light_blue"
         app:popupTheme="@style/AppTheme"
         />
 
@@ -26,7 +26,7 @@
         android:textSize="20sp" />
 
     <android.support.v7.widget.AppCompatEditText
-        android:id="@+id/rest_adrese"
+        android:id="@+id/rest_adresse"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/rest_adrese"
+        android:layout_below="@+id/rest_adresse"
         android:hint="Telefon"
         android:textSize="20sp" />
 
