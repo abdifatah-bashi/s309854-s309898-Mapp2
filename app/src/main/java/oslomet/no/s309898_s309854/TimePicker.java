@@ -70,7 +70,7 @@ public class TimePicker extends DialogPreference {
     protected View onCreateDialogView() {
         picker = new android.widget.TimePicker(getContext());
         picker.setIs24HourView(true);
-        picker.setBackgroundResource(R.color.background_color);
+        picker.setBackgroundResource(R.color.bgc_color);
         return picker;
     }
 

@@ -16,8 +16,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
 
+import oslomet.no.s309898_s309854.DatabaseHelper;
 import oslomet.no.s309898_s309854.R;
 import oslomet.no.s309898_s309854.RedigerVennAktivitet;
+import oslomet.no.s309898_s309854.RestaurantAktivitet;
+import oslomet.no.s309898_s309854.VennAktivitet;
 import oslomet.no.s309898_s309854.modeller.Venn;
 
 public class VennListeAdapter extends ArrayAdapter<Venn> {
@@ -25,7 +28,7 @@ public class VennListeAdapter extends ArrayAdapter<Venn> {
     private Context context;
     private int resource;
     private ArrayList<Venn> friendsArrayList;
-
+    DatabaseHelper databaseHelper;
 
 
 
@@ -42,6 +45,7 @@ public class VennListeAdapter extends ArrayAdapter<Venn> {
 
         super(context, resource, freindsArrayList);
 
+        databaseHelper=new DatabaseHelper(context);
 
         this.friendsArrayList = freindsArrayList;
         this.context = context;
@@ -84,7 +88,7 @@ public class VennListeAdapter extends ArrayAdapter<Venn> {
         editBtn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View vew){
                 Intent intent = new Intent(context, RedigerVennAktivitet.class);
-                intent.putExtra("id", friendsArrayList.get(position).getId());
+                intent.putExtra("Id", friendsArrayList.get(position).getId());
                 intent.putExtra("fornavn", friendsArrayList.get(position).getFornavn());
                 intent.putExtra("etternavn", friendsArrayList.get(position).getEtternavn());
                 intent.putExtra("telefon", friendsArrayList.get(position).getTelefon());
@@ -99,7 +103,10 @@ public class VennListeAdapter extends ArrayAdapter<Venn> {
         ImageView deleteBtn = convertView.findViewById(R.id.delete_btn);
         deleteBtn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View vew){
-                onDeleteConfirm();
+                Intent intent = new Intent(context, RestaurantAktivitet.class);
+                intent.putExtra("Id", friendsArrayList.get(position).getId());
+                int id=friendsArrayList.get(position).getId();
+                onDeleteConfirm(id);
                 notifyDataSetChanged();
 
 
@@ -111,7 +118,7 @@ public class VennListeAdapter extends ArrayAdapter<Venn> {
         return convertView;
     }
 
-    public void onDeleteConfirm(){
+    public void onDeleteConfirm(final int id){
 
         AlertDialog.Builder builder;
         String message = context.getResources().getString(R.string.alert_friend_msg);//"Vil du virkelig avslutte spillet?";
@@ -133,7 +140,10 @@ public class VennListeAdapter extends ArrayAdapter<Venn> {
         builder
                 .setPositiveButton(R.string.ja, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(context, "JA", Toast.LENGTH_LONG).show();
+                        databaseHelper.slettVenn(id);
+
+                        Intent intent=new Intent(context,VennAktivitet.class);
+                        context.startActivity(intent);
 
 
                     }

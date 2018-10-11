@@ -2,12 +2,17 @@ package oslomet.no.s309898_s309854;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.ClipData;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -23,6 +28,9 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
+import oslomet.no.s309898_s309854.modeller.Bestilling;
+import oslomet.no.s309898_s309854.modeller.Bestilling_Venner;
+import oslomet.no.s309898_s309854.modeller.Restaurant;
 import oslomet.no.s309898_s309854.modeller.Venn;
 
 public class NyBestillingAktivitet extends AppCompatActivity {
@@ -31,46 +39,57 @@ public class NyBestillingAktivitet extends AppCompatActivity {
     private Spinner spinner;
     private Button datoBtn;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
-
+DatabaseHelper databaseHelper;
 
     Button leggVennBtn;
+    Button bestill;
     TextView valgtVenner;
     boolean[] checkedItems;
-    ArrayList<Integer> venner = new ArrayList<>();
-
+    ArrayList<Integer> venner_pos = new ArrayList<>();
+    ArrayList<String> venner;
+    ArrayList<Integer> f_e= new ArrayList<>();
+    String v_pos="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.aktivitet_ny_bestilling);
-
+        databaseHelper=new DatabaseHelper(this);
         datoBtn =  findViewById(R.id.velg_dato);
         tidBtn = findViewById(R.id.velg_tid);
         spinner= findViewById(R.id.spinner_restaurant);
+        spinner.getBackground().setColorFilter(getResources().getColor(R.color.red), PorterDuff.Mode.SRC_ATOP);
+        bestill =findViewById(R.id.bestillingBtn);
+
+
         velgDato(datoBtn);
         visRestauranterDropDown(spinner);
 
         // Venn liste
-        final ArrayList<Venn> liste = new ArrayList<>();
-        liste.add(new Venn("Ross", "Galer ", "45454567"));
-        liste.add(new Venn("Monica", "Galer ", "45454567"));
-        liste.add(new Venn("Joey", "Tribbiani ", "45454567"));
-        liste.add(new Venn("Phoebe ", "buffay ", "45454567"));
+        final ArrayList<Venn> liste_venner = databaseHelper.hentAlleVenner();
 
 
-        ArrayList<String> venner = new ArrayList<>();
-        for (int i = 0; i <liste.size() ; i++) {
-            venner.add(liste.get(i).getFornavn() + " " + liste.get(i).getEtternavn());
+
+        venner = new ArrayList<>();
+        for (int i = 0; i <liste_venner.size() ; i++) {
+            f_e.add(liste_venner.get(i).getId());
+            venner.add(liste_venner.get(i).getFornavn() + " " + liste_venner.get(i).getEtternavn());
         }
-        Log.i("Test", Arrays.toString(venner.toArray()));
+        Log.i("Test", Arrays.toString(f_e.toArray()));
         CharSequence[] cs = venner.toArray(new CharSequence[venner.size()]);
+         visVennerDropDown(cs);
 
-
-        visVennerDropDown(cs);
+        //Toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Legg til ny bestilling");
+        toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 
     }
 
-    public void visVennerDropDown(final CharSequence [] vennListe){
+    public void visVennerDropDown(final CharSequence[] vennListe){
         leggVennBtn = (Button) findViewById(R.id.venner_label);
         valgtVenner = (TextView) findViewById(R.id.tvItemSelected);
 
@@ -85,33 +104,41 @@ public class NyBestillingAktivitet extends AppCompatActivity {
         leggVennBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder mBuilder = new AlertDialog.Builder(NyBestillingAktivitet.this);
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(NyBestillingAktivitet.this, R.style.AlertDialog);
                 mBuilder.setTitle(R.string.dialog_title);
                 mBuilder.setMultiChoiceItems(vennListe , checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int position, boolean isChecked) {
                         if(isChecked){
-                            venner.add(position);
+                            venner_pos.add(position);
+                            Log.i("pos",String.valueOf(position));
                         }else{
-                            venner.remove((Integer.valueOf(position)));
+                            venner_pos.remove((Integer.valueOf(position)));
                         }
                     }
                 });
 
                 mBuilder.setCancelable(false);
+
                 mBuilder.setPositiveButton(R.string.ok_label, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int which) {
+                        //String s = vennListe.toString();
+
                         String item = "";
-                        for (int i = 0; i < venner.size(); i++) {
-                            item = item + vennListe[venner.get(i)];
-                            if (i != venner.size() - 1) {
+                        for (int i = 0; i < venner_pos.size(); i++) {
+                            item = item + vennListe[venner_pos.get(i)];
+                            v_pos += f_e.get(venner_pos.get(i));
+                            if (i != venner_pos.size() - 1) {
                                 item = item + ", ";
                             }
                         }
+
+
                         valgtVenner.setText("Valgt venner: " + item);
                     }
                 });
+
 
                 mBuilder.setNegativeButton(R.string.dismiss_label, new DialogInterface.OnClickListener() {
                     @Override
@@ -123,6 +150,7 @@ public class NyBestillingAktivitet extends AppCompatActivity {
 
 
                 AlertDialog mDialog = mBuilder.create();
+
                 mDialog.show();
             }
         });
@@ -185,10 +213,16 @@ public class NyBestillingAktivitet extends AppCompatActivity {
     }
 
 
-    public void visRestauranterDropDown(Spinner spinner){
-        String[] restaurantList = new String[]{"Fridays ", "Der Peppern Gror","Gamle Rådhuset","Vulkan Fisk", "Fiskeriet Youngstorget"};
-        List<String> restauranter = Arrays.asList(restaurantList);
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+    public void visRestauranterDropDown(final Spinner spinner){
+       // String[] restaurantList = new String[]{"Fridays ", "Der Peppern Gror","Gamle Rådhuset","Vulkan Fisk", "Fiskeriet Youngstorget"};
+        ArrayList<Restaurant> list_restauranter=databaseHelper.hentAlleRestauranter();
+        List<String> restauranter = new ArrayList<>();
+
+        for(Restaurant res:list_restauranter){
+            restauranter.add(res.getNavn());
+        }
+
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this,
                 R.layout.spinner_item, restauranter);
         dataAdapter.setDropDownViewResource(R.layout.spinner_item);
         spinner.setAdapter(dataAdapter);
@@ -205,7 +239,7 @@ public class NyBestillingAktivitet extends AppCompatActivity {
                     e.printStackTrace();
 
                 }
-                //Log.i("NR", spinner.getSelectedItem().toString());
+              //  Log.i("NR", spinner.getSelectedItem().toString());
             }
 
             @Override
@@ -216,6 +250,32 @@ public class NyBestillingAktivitet extends AppCompatActivity {
     }
 
 
+    public void addBestilling(View v) {
+
+        int restaurant_id = databaseHelper.hentRestaurant(spinner.getSelectedItem().toString());
+
+        Bestilling best = new Bestilling();
+
+        best.setDato(datoBtn.getText().toString());
+        best.setKlokkeslett(tidBtn.getText().toString());
+        best.setRestaurant_id(restaurant_id);
+        databaseHelper.addBestilling(best);
+
+        int id = databaseHelper.getLastBestilling();
+       // Log.i("BVID", String.valueOf(id));
+            Bestilling bestilling = databaseHelper.getBestilling(id);
+            //Log.i("BBB", String.valueOf(bestilling.getId()));
+            String[] v_positions = v_pos.split("");
+
+            for (int i = 1; i < v_positions.length; i++) {
+                Venn venn = databaseHelper.getVenn(Integer.valueOf(v_positions[i]));
+                databaseHelper.addVenn_Bestilling(bestilling, venn);
+            }
+            Intent i = new Intent(this, BestillingAktivitet.class);
+            startActivity(i);
+            finish();
+
+        }
 
 
 }

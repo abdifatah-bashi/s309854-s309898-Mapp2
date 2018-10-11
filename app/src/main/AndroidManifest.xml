@@ -24,7 +24,8 @@
         </activity>
         <activity
             android:name=".RestaurantAktivitet"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:noHistory="true"/>
         <activity
             android:name=".VennAktivitet"
             android:parentActivityName=".VennAktivitet" />
@@ -43,7 +44,6 @@
         <activity android:name=".BestillingAktivitet" />
         <activity android:name=".InstillingAktivitet" />
         <activity android:name=".NyBestillingAktivitet"></activity>
-
 
     </application>
 

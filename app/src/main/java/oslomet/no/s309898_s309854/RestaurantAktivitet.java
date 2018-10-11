@@ -1,10 +1,12 @@
 package oslomet.no.s309898_s309854;
 
+import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -22,11 +24,22 @@ public class RestaurantAktivitet extends AppCompatActivity {
     ListView listView;
     Button addRestaurantBtn;
     DatabaseHelper databaseHelper;
+    Context context;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.aktivitet_restaurant);
+        setContentView(R.layout.aktivitet_restaurant);  //Toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Restauranter");
+        toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
 
         databaseHelper = new DatabaseHelper(this);
         addRestaurantBtn = findViewById(R.id.addBtn);
@@ -36,6 +49,7 @@ public class RestaurantAktivitet extends AppCompatActivity {
 
         res = (ArrayList) databaseHelper.hentAlleRestauranter();
 
+        for(Restaurant rest:res) Log.i("Ind", "Id = "+ rest.getID());
         RestaurantListeAdapter adapter = new RestaurantListeAdapter(this, R.layout.restaurant_liste_view, res);
         listView.setAdapter(adapter);
     }
@@ -47,12 +61,8 @@ public class RestaurantAktivitet extends AppCompatActivity {
 
     }
 
-    public void slettRestaurant() {
+    public void slettRestaurant(int id) {
 
-        int id;
-        Restaurant restaurant;
-
-        id = getIntent().getIntExtra("Id", -1);
         databaseHelper.slettRestaurant(id);
 
 

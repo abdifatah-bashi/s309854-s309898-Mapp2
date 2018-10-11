@@ -12,6 +12,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Restaurant navn"
+            android:textColor="@color/text_color"
             android:textSize="20sp" />
 
         <android.support.v7.widget.AppCompatTextView
@@ -20,6 +21,7 @@
             android:id="@+id/bestilling_dato"
             android:text="Dato"
             android:layout_below="@+id/r_navn"
+            android:textColor="@color/text_color"
             android:textSize="20sp" />
 
         <android.support.v7.widget.AppCompatTextView
@@ -27,6 +29,7 @@
             android:layout_height="wrap_content"
             android:text="Venner Venner venner venner"
             android:layout_below="@id/bestilling_dato"
+            android:textColor="@color/text_color"
 
             android:id="@+id/b_venner"
             android:textSize="20sp" />

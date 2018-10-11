@@ -9,5 +9,11 @@
     <color name="color_spinner_item">#9FA8DA</color>
     <color name="blue">#7986CB</color>
     <color name="light_blue">#C5CAE9</color>
-    <color name="background_color">#FFFFFF</color>
+    <color name="bgc_color"> #cfd8dc</color>
+    <color name="text_color">  #212121</color>
+
+
+
+
+
 </resources>

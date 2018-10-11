@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -34,11 +35,21 @@ import oslomet.no.s309898_s309854.modeller.Venn;
 public class BestillingAktivitet extends AppCompatActivity {
 
     private ListView listView;
+    DatabaseHelper databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.aktivitet_bestilling);
+        databaseHelper=new DatabaseHelper(this);
+
+        //Toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Bestillinger");
+        toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         listView = findViewById(R.id.bestilling_list_view);
 
@@ -57,13 +68,19 @@ public class BestillingAktivitet extends AppCompatActivity {
         String tid = "18:00";
         // Opprett list av bestillinger
         ArrayList<Bestilling> bestillinger = new ArrayList<>();
-        bestillinger.add(new Bestilling(restaurant1, liste, dato, tid) );
-        bestillinger.add(new Bestilling(restaurant2, liste, dato, tid) );
-        bestillinger.add(new Bestilling(restaurant1, liste, dato, tid) );
+
+        bestillinger= (ArrayList)databaseHelper.hentAlleBestillinger();
+
+       // bestillinger.add(new Bestilling(restaurant1, liste, dato, tid) );
+        // bestillinger.add(new Bestilling(restaurant2, liste, dato, tid) );
+        //bestillinger.add(new Bestilling(restaurant1, liste, dato, tid) );
 
 
         BestillingListeAdapter adapter = new BestillingListeAdapter(this, R.layout.bestilling_list_view, bestillinger);
         listView.setAdapter(adapter);
+
+
+
 
 
     }
@@ -74,6 +91,8 @@ public class BestillingAktivitet extends AppCompatActivity {
         startActivity(intent);
 
     }
+
+
 
 
 

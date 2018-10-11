@@ -31,6 +31,7 @@ public class RestaurantListeAdapter extends ArrayAdapter<Restaurant> {
     private Context context;
     private int resource;
     private ArrayList<Restaurant> restaurantArrayList;
+    RestaurantAktivitet restaurantAktivitet;
 
     DatabaseHelper databaseHelper;
 
@@ -47,8 +48,7 @@ public class RestaurantListeAdapter extends ArrayAdapter<Restaurant> {
     public RestaurantListeAdapter(Context context, int resource, ArrayList<Restaurant> restaurantArrayList) {
 
         super(context, resource, restaurantArrayList);
-
-
+        databaseHelper= new DatabaseHelper(context);
         this.restaurantArrayList = restaurantArrayList;
         this.context = context;
         this.resource = resource;
@@ -59,7 +59,6 @@ public class RestaurantListeAdapter extends ArrayAdapter<Restaurant> {
     public View getView(final int position, View convertView, ViewGroup parent) {
 
         String name = getItem(position).getNavn();
-
        // Intent intent = new Intent(context, RestaurantAktivitet.class);
         //intent.putExtra("Id", restaurantArrayList.get(position).getID());
 
@@ -106,7 +105,11 @@ public class RestaurantListeAdapter extends ArrayAdapter<Restaurant> {
         ImageView deleteBtn = convertView.findViewById(R.id.delete_btn);
         deleteBtn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View vew){
-                onDeleteConfirm();
+                Intent intent = new Intent(context, RestaurantAktivitet.class);
+                intent.putExtra("Id", restaurantArrayList.get(position).getID());
+                int id=restaurantArrayList.get(position).getID();
+                onDeleteConfirm(id);
+
                 notifyDataSetChanged();
 
 
@@ -118,7 +121,8 @@ public class RestaurantListeAdapter extends ArrayAdapter<Restaurant> {
         return convertView;
     }
 
-    public void onDeleteConfirm(){
+    public void onDeleteConfirm(final int id){
+
 
         AlertDialog.Builder builder;
         String message = context.getResources().getString(R.string.alert_restaurant_msg);//"Vil du virkelig avslutte spillet?";
@@ -140,10 +144,11 @@ public class RestaurantListeAdapter extends ArrayAdapter<Restaurant> {
         builder
                 .setPositiveButton(R.string.ja, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(context, "JA", Toast.LENGTH_LONG).show();
-                        /*Intent intent = new Intent(context, RestaurantAktivitet.class);
-                        int id =Integer.valueOf(intent.getStringExtra("Id"));
-                         databaseHelper.slettRestaurant(id);*/
+                         databaseHelper.slettRestaurant(id);
+
+                         Intent intent=new Intent(context,RestaurantAktivitet.class);
+                         context.startActivity(intent);
+
 
 
                     }

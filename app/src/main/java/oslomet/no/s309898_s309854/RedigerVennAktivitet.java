@@ -27,9 +27,9 @@ public class RedigerVennAktivitet extends AppCompatActivity {
 
         databaseHelper=new DatabaseHelper(this);
 
-        EditText fornavn = findViewById(R.id.fornavn);
-        EditText etternavn = findViewById(R.id.etternavn);
-        EditText telefon = findViewById(R.id.telefon);
+        fornavn = (EditText)findViewById(R.id.fornavn_edit);
+        etternavn = (EditText)findViewById(R.id.etternavn_edit);
+        telefon = (EditText)findViewById(R.id.telefon_edit);
 
         fornavn.setText(getIntent().getStringExtra("fornavn"));
         etternavn.setText(getIntent().getStringExtra("etternavn"));
@@ -65,21 +65,10 @@ public class RedigerVennAktivitet extends AppCompatActivity {
 
 
 
-
-                // Restaurant restaurant = new Restaurant(navn_res, adress_res, telefon_res, type_res);
-                // databaseHelper.addRestaurant(restaurant);
-
-               /* ContentValues values = new ContentValues();
-                values.put("navn", navn_res);
-                values.put("adresse", adress_res);
-                values.put("telefon", telefon_res);
-                values.put("type", type_res);
-                getContentResolver().insert(CONTENT_URI,values);*/
-
                 int ID;
                 Venn venn;
 
-                ID = getIntent().getIntExtra("ID", -1);
+                ID = getIntent().getIntExtra("Id", -1);
                 venn = databaseHelper.getVenn(ID);
                 venn.setFornavn(fornavn_Edit);
                 venn.setEtternavn(etternavn_Edit);
@@ -88,7 +77,7 @@ public class RedigerVennAktivitet extends AppCompatActivity {
                 databaseHelper.updateVenn(venn);
 
 
-                Intent i = new Intent(this, RestaurantAktivitet.class);
+                Intent i = new Intent(this, VennAktivitet.class);
                 startActivity(i);
                 finish();
 

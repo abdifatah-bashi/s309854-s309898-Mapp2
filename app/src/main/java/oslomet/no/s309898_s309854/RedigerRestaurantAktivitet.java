@@ -31,14 +31,11 @@ public class RedigerRestaurantAktivitet extends AppCompatActivity {
 
         databaseHelper = new DatabaseHelper(this);
 
-       // i=(EditText)findViewById(R.id.r_id) ;
         navn = (EditText)findViewById(R.id.rest_navn_edit);
         adress = (EditText)findViewById(R.id.rest_adresse_edit);
         telefon = (EditText)findViewById(R.id.rest_telefon_edit);
         type = (EditText)findViewById(R.id.rest_type_edit);
 
-//        id = Integer.valueOf(getIntent().getStringExtra("Id"));
-      // i.setText(getIntent().getStringExtra("Id"));
         navn.setText(getIntent().getStringExtra("navn"));
         adress.setText(getIntent().getStringExtra("adress"));
         telefon.setText(getIntent().getStringExtra("telefon"));
@@ -51,6 +48,7 @@ public class RedigerRestaurantAktivitet extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
 
     }
 
@@ -76,7 +74,6 @@ public class RedigerRestaurantAktivitet extends AppCompatActivity {
 
                 int ID;
                 Restaurant restaurant;
-                        // Jeg får ikke ID????
                     ID = getIntent().getIntExtra("Id", -1);
                     restaurant = databaseHelper.getRestaurant(ID);
                     restaurant.setNavn(navn_res_Edit);
