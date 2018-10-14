@@ -385,4 +385,28 @@ public class DatabaseHjelper extends SQLiteOpenHelper {
         db.close();
         return null;
     }
+
+    public boolean sjekkTidspunkt(String tidspunkt){
+        /*
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.query(TABLE_MELDINGER,
+                new String[] { KEY_MELDING_ID, KEY_MELDING, KEY_TIDSPUNKT }, KEY_TIDSPUNKT + " = ?",
+                new String[] { tidspunkt }, null, null, null);
+
+        if(cursor != null) {
+            if(cursor.moveToFirst()) {
+                Melding melding = new Melding(cursor.getInt(0), cursor.getString(1), cursor.getString(2));
+
+                cursor.close();
+                db.close();
+                return true;
+            }
+        }
+
+        db.close();
+        return false;
+
+        */
+        return false;
+    }
 }

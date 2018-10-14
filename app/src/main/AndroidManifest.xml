@@ -2,9 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="oslomet.no.s309898_s309854">
     <uses-permission android:name="oslomet.no.s309898_s309854.permission"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE">
-    </uses-permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.SEND_SMS" />
     <permission android:name="oslomet.no.s309898_s309854.permission"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
 
     <application
         android:allowBackup="true"
@@ -44,7 +47,17 @@
         <activity android:name=".BestillingAktivitet" />
         <activity android:name=".InstillingAktivitet" />
         <activity android:name=".NyBestillingAktivitet"></activity>
+        <receiver android:name=".MyBroadcastReceiver">
+            <intent-filter>
+                <action android:name="com.example.s309854_s309898.myBroadcastReceiver"
+                    />
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
 
+        <service android:name=".PeriodiskService" />
+        <service android:name=".SetService" />
+        <service android:name=".MyService" />
     </application>
 
 </manifest>

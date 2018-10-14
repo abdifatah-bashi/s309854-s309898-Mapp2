@@ -37,6 +37,7 @@ public class BestillingAktivitet extends AppCompatActivity {
 
         // Hent list av bestillinger
         ArrayList<Bestilling> bestillinger = (ArrayList) databaseHjelper.hentAlleBestillinger();
+
         BestillingListeAdapter adapter = new BestillingListeAdapter(this, R.layout.bestilling_list_view, bestillinger);
         listView.setAdapter(adapter);
     }

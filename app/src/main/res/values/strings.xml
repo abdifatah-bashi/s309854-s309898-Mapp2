@@ -92,7 +92,7 @@
     <string name="set">Sett</string>
 
     <!-- Result of notification -->
-    <string name="notification_title">Student varsling</string>
+    <string name="notification_title">Bestilling påminnelse</string>
     <string name="notification_message">Melding sendt!</string>
     <string name="result_class_title">SMS sendt</string>
 
