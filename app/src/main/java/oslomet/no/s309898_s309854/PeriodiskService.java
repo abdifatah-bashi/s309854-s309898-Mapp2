@@ -19,7 +19,6 @@ import android.util.Log;
 
 import java.util.Calendar;
 import java.util.List;
-
 import oslomet.no.s309898_s309854.modeller.Bestilling;
 import oslomet.no.s309898_s309854.modeller.Venn;
 
@@ -54,8 +53,6 @@ public class PeriodiskService extends Service {
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MILLISECOND, 0);
 
-
-        Log.i("Kalanderen er nå: ",  " " + calendar.getTimeInMillis());
         Intent i = new Intent(this, MyService.class);
         PendingIntent pintent = PendingIntent.getService(this, 0, i, 0);
         AlarmManager alarm =
