@@ -9,7 +9,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import oslomet.no.s309898_s309854.modeller.Restaurant;
 
@@ -20,21 +19,18 @@ public class RedigerRestaurantAktivitet extends AppCompatActivity {
     EditText adress;
     EditText telefon;
     EditText type;
-   // EditText i;
-   // int id;
-
-    DatabaseHelper databaseHelper;
+    DatabaseHjelper databaseHjelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.aktivitet_rediger_restaurant);
 
-        databaseHelper = new DatabaseHelper(this);
+        databaseHjelper = new DatabaseHjelper(this);
 
-        navn = (EditText)findViewById(R.id.rest_navn_edit);
-        adress = (EditText)findViewById(R.id.rest_adresse_edit);
-        telefon = (EditText)findViewById(R.id.rest_telefon_edit);
-        type = (EditText)findViewById(R.id.rest_type_edit);
+        navn = findViewById(R.id.rest_navn_edit);
+        adress = findViewById(R.id.rest_adresse_edit);
+        telefon = findViewById(R.id.rest_telefon_edit);
+        type = findViewById(R.id.rest_type_edit);
 
         navn.setText(getIntent().getStringExtra("navn"));
         adress.setText(getIntent().getStringExtra("adress"));
@@ -75,12 +71,12 @@ public class RedigerRestaurantAktivitet extends AppCompatActivity {
                 int ID;
                 Restaurant restaurant;
                     ID = getIntent().getIntExtra("Id", -1);
-                    restaurant = databaseHelper.getRestaurant(ID);
+                    restaurant = databaseHjelper.hentRestaurant(ID);
                     restaurant.setNavn(navn_res_Edit);
                     restaurant.setAdresse(adress_res_Edit);
                     restaurant.setTelefon(telefon_res_Edit);
                     restaurant.setType(type_res_Edit);
-                    databaseHelper.updateRestaurant(restaurant);
+                    databaseHjelper.oppdaterRestaurant(restaurant);
 
 
                 Intent i = new Intent(this, RestaurantAktivitet.class);

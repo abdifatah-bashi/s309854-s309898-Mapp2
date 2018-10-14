@@ -10,26 +10,25 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
 
-import oslomet.no.s309898_s309854.modeller.Restaurant;
 import oslomet.no.s309898_s309854.modeller.Venn;
 
 public class RedigerVennAktivitet extends AppCompatActivity {
 
     EditText fornavn;
-    EditText etternavn ;
-    EditText telefon ;
+    EditText etternavn;
+    EditText telefon;
+    DatabaseHjelper databaseHjelper;
 
-    DatabaseHelper databaseHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.aktivitet_rediger_venn);
 
-        databaseHelper=new DatabaseHelper(this);
+        databaseHjelper = new DatabaseHjelper(this);
 
-        fornavn = (EditText)findViewById(R.id.fornavn_edit);
-        etternavn = (EditText)findViewById(R.id.etternavn_edit);
-        telefon = (EditText)findViewById(R.id.telefon_edit);
+        fornavn = findViewById(R.id.fornavn_edit);
+        etternavn = findViewById(R.id.etternavn_edit);
+        telefon = findViewById(R.id.telefon_edit);
 
         fornavn.setText(getIntent().getStringExtra("fornavn"));
         etternavn.setText(getIntent().getStringExtra("etternavn"));
@@ -55,7 +54,7 @@ public class RedigerVennAktivitet extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
 
             case R.id.save:
 
@@ -63,18 +62,16 @@ public class RedigerVennAktivitet extends AppCompatActivity {
                 String etternavn_Edit = etternavn.getText().toString();
                 String telefon_Edit = telefon.getText().toString();
 
-
-
                 int ID;
                 Venn venn;
 
                 ID = getIntent().getIntExtra("Id", -1);
-                venn = databaseHelper.getVenn(ID);
+                venn = databaseHjelper.hentVenn(ID);
                 venn.setFornavn(fornavn_Edit);
                 venn.setEtternavn(etternavn_Edit);
                 venn.setTelefon(telefon_Edit);
 
-                databaseHelper.updateVenn(venn);
+                databaseHjelper.oppdaterVenn(venn);
 
 
                 Intent i = new Intent(this, VennAktivitet.class);

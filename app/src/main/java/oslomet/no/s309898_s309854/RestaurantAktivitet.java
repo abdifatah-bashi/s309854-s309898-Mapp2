@@ -10,24 +10,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import oslomet.no.s309898_s309854.ListeAdapter.RestaurantListeAdapter;
-import oslomet.no.s309898_s309854.R;
 import oslomet.no.s309898_s309854.modeller.Restaurant;
 
 public class RestaurantAktivitet extends AppCompatActivity {
 
     ListView listView;
     Button addRestaurantBtn;
-    DatabaseHelper databaseHelper;
-    Context context;
-
-
-
+    DatabaseHjelper databaseHjelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,31 +34,25 @@ public class RestaurantAktivitet extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 
-        databaseHelper = new DatabaseHelper(this);
+        databaseHjelper = new DatabaseHjelper(this);
         addRestaurantBtn = findViewById(R.id.addBtn);
 
         listView = findViewById(R.id.restListView);
         ArrayList<Restaurant> res = new ArrayList<>();
-
-        res = (ArrayList) databaseHelper.hentAlleRestauranter();
-
-        for(Restaurant rest:res) Log.i("Ind", "Id = "+ rest.getID());
+        res = (ArrayList) databaseHjelper.hentAlleRestauranter();
         RestaurantListeAdapter adapter = new RestaurantListeAdapter(this, R.layout.restaurant_liste_view, res);
         listView.setAdapter(adapter);
     }
 
 
-    public void onRestaurantAdd(View view) {
+    public void onNyRestaurant(View view) {
         Intent intent = new Intent(this, NyRestaurantAktivitet.class);
         startActivity(intent);
 
     }
 
-    public void slettRestaurant(int id) {
-
-        databaseHelper.slettRestaurant(id);
-
-
+    public void onSlettRestaurant(int id) {
+        databaseHjelper.slettRestaurant(id);
         Intent i = new Intent(this, RestaurantAktivitet.class);
         startActivity(i);
         finish();

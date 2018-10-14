@@ -16,7 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
 
-import oslomet.no.s309898_s309854.DatabaseHelper;
+import oslomet.no.s309898_s309854.DatabaseHjelper;
 import oslomet.no.s309898_s309854.R;
 import oslomet.no.s309898_s309854.RedigerVennAktivitet;
 import oslomet.no.s309898_s309854.RestaurantAktivitet;
@@ -27,27 +27,18 @@ public class VennListeAdapter extends ArrayAdapter<Venn> {
 
     private Context context;
     private int resource;
-    private ArrayList<Venn> friendsArrayList;
-    DatabaseHelper databaseHelper;
-
-
-
+    private ArrayList<Venn> vennerArrayList;
+    DatabaseHjelper databaseHjelper;
     /**
      * Holds variables in a View
      */
     private static class ViewHolder {
-        TextView friendName;
-
+        TextView vennNavn;
     }
-
-
-    public VennListeAdapter(Context context, int resource, ArrayList<Venn> freindsArrayList) {
-
-        super(context, resource, freindsArrayList);
-
-        databaseHelper=new DatabaseHelper(context);
-
-        this.friendsArrayList = freindsArrayList;
+    public VennListeAdapter(Context context, int resource, ArrayList<Venn> vennerList) {
+        super(context, resource, vennerList);
+        databaseHjelper =new DatabaseHjelper(context);
+        this.vennerArrayList = vennerList;
         this.context = context;
         this.resource = resource;
     }
@@ -59,62 +50,49 @@ public class VennListeAdapter extends ArrayAdapter<Venn> {
         String fornavn = getItem(position).getFornavn();
         String etternavn =getItem(position).getEtternavn() ;
         String telefon =getItem(position).getTelefon() ;
-
-
-        //Create statistic object
-        final Venn freind = new Venn(fornavn , etternavn, telefon );
-
-
+        final Venn venn = new Venn(fornavn , etternavn, telefon );
 
         //ViewHolder object
         ViewHolder holder;
-
 
         if(convertView == null){
             LayoutInflater inflater = LayoutInflater.from(context);
             convertView = inflater.inflate(resource, parent, false);
             holder= new ViewHolder();
-
-            holder.friendName = convertView.findViewById(R.id.restaurantName);
-
+            holder.vennNavn = convertView.findViewById(R.id.restaurantName);
             convertView.setTag(holder);
         }
         else{
             holder = (ViewHolder) convertView.getTag();
         }
 
-        // On edit
+        // Rediger
         ImageView editBtn = convertView.findViewById(R.id.edit_btn);
         editBtn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View vew){
                 Intent intent = new Intent(context, RedigerVennAktivitet.class);
-                intent.putExtra("Id", friendsArrayList.get(position).getId());
-                intent.putExtra("fornavn", friendsArrayList.get(position).getFornavn());
-                intent.putExtra("etternavn", friendsArrayList.get(position).getEtternavn());
-                intent.putExtra("telefon", friendsArrayList.get(position).getTelefon());
+                intent.putExtra("Id", vennerArrayList.get(position).getId());
+                intent.putExtra("fornavn", vennerArrayList.get(position).getFornavn());
+                intent.putExtra("etternavn", vennerArrayList.get(position).getEtternavn());
+                intent.putExtra("telefon", vennerArrayList.get(position).getTelefon());
                 context.startActivity(intent);
                 notifyDataSetChanged();
-
-
             }
         });
 
-
+        // Slett
         ImageView deleteBtn = convertView.findViewById(R.id.delete_btn);
         deleteBtn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View vew){
                 Intent intent = new Intent(context, RestaurantAktivitet.class);
-                intent.putExtra("Id", friendsArrayList.get(position).getId());
-                int id=friendsArrayList.get(position).getId();
+                intent.putExtra("Id", vennerArrayList.get(position).getId());
+                int id= vennerArrayList.get(position).getId();
                 onDeleteConfirm(id);
                 notifyDataSetChanged();
-
-
             }
         });
 
-
-        holder.friendName.setText(freind.getFornavn() + " " + freind.getEtternavn());
+        holder.vennNavn.setText(venn.getFornavn() + " " + venn.getEtternavn());
         return convertView;
     }
 
@@ -135,17 +113,13 @@ public class VennListeAdapter extends ArrayAdapter<Venn> {
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,22);
 
         builder.setView(textView);
-
-
         builder
                 .setPositiveButton(R.string.ja, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        databaseHelper.slettVenn(id);
+                        databaseHjelper.slettVenn(id);
 
                         Intent intent=new Intent(context,VennAktivitet.class);
                         context.startActivity(intent);
-
-
                     }
                 })
                 .setNegativeButton(R.string.nei, new DialogInterface.OnClickListener() {
@@ -156,15 +130,5 @@ public class VennListeAdapter extends ArrayAdapter<Venn> {
                     }
                 })
                 .show();
-
-
-
-
-
     }
-
-
-
-
-
 }

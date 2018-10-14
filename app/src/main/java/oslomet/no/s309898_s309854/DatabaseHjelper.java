@@ -14,7 +14,7 @@ import oslomet.no.s309898_s309854.modeller.Bestilling;
 import oslomet.no.s309898_s309854.modeller.Restaurant;
 import oslomet.no.s309898_s309854.modeller.Venn;
 
-public class DatabaseHelper extends SQLiteOpenHelper {
+public class DatabaseHjelper extends SQLiteOpenHelper {
 
     private static final String DB_NAVN = "restaurant_bestilling1.db";
     private static final int DB_VERSJON = 1;
@@ -48,7 +48,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     static String VENN_ID= "id_venn";
 
 
-    public DatabaseHelper(Context context) {
+    public DatabaseHjelper(Context context) {
         super(context, DB_NAVN, null, DB_VERSJON);
     }
 
@@ -89,11 +89,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_RESTAURANT);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_VENN);
-        Log.d("DatabaseHelper", "updated");
+        Log.d("DatabaseHjelper", "updated");
         onCreate(db);
     }
 
-    public void addRestaurant(Restaurant restaurant){
+    public void leggTilRestaurant(Restaurant restaurant){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         //values.put(ID_RESTAURANT, restaurant.getID());
@@ -102,51 +102,38 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(TELEFONNR_RESTAURANT, restaurant.getTelefon());
         values.put(TYPE_RESTAURANT, restaurant.getType());
         db.insert(TABLE_RESTAURANT, null, values);
-        db.close();
-       // getContentResolver().insert(CONTENT_URI,values);
-
+        db.close(); 
     }
 
-    public void addVenn(Venn venn){
+    public void leggTilVenn(Venn venn){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        //values.put(ID_RESTAURANT, restaurant.getID());
         values.put(FORNAVN, venn.getFornavn());
         values.put(ETTERNAVN, venn.getEtternavn());
         values.put(TELEFONNR_VENN, venn.getTelefon());
-
         db.insert(TABLE_VENN, null, values);
         db.close();
-        // getContentResolver().insert(CONTENT_URI,values);
 
     }
 
-    public void addBestilling(Bestilling bestilling){
+    public void leggTilBestilling(Bestilling bestilling){
         SQLiteDatabase db =this.getWritableDatabase();
         ContentValues value_best=new ContentValues();
         value_best.put(DATO,bestilling.getDato());
         value_best.put(KLOKKESLETT,bestilling.getKlokkeslett());
         value_best.put(RESTAURANT_ID,bestilling.getRestaurant_id());
-        db.insert(TABLE_BESTILLING,null, value_best);
-
-
+        db.insert(TABLE_BESTILLING,null, value_best); 
     }
 
-    public int getLastBestilling(){
+    public int hentSisteBestilling(){
 
         String query="SELECT * FROM " + TABLE_BESTILLING;
         SQLiteDatabase db =this.getWritableDatabase();
-       /* Cursor cursor = db.query(TABLE_BESTILLING,
-                new String[] { ID_BESTILLING, DATO, KLOKKESLETT, RESTAURANT_ID }, null, null,null, null, null, null);
-        */
         Cursor cursor = db.rawQuery(query, null);
-
         Bestilling b= new Bestilling();
 
         if(cursor.moveToLast()) {
-            //do{
-                b = new Bestilling(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getInt(3));
-            //}while(cursor.moveToNext());
+            b = new Bestilling(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getInt(3));
             cursor.close();
             db.close();
             return b.getId();
@@ -176,7 +163,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return null;
     }
 
-    public void addVenn_Bestilling(Bestilling bestilling,Venn venn){
+    public void leggTilVennBestilling(Bestilling bestilling, Venn venn){
         SQLiteDatabase db =this.getWritableDatabase();
         ContentValues value_best_venn=new ContentValues();
 
@@ -187,7 +174,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public int updateRestaurant(Restaurant restaurant){
+    public int oppdaterRestaurant(Restaurant restaurant){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(NAVN_RESTAURANT, restaurant.getNavn());
@@ -200,7 +187,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return changedRestaurant;
     }
 
-    public int updateVenn(Venn venn){
+    public int oppdaterVenn(Venn venn){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(FORNAVN, venn.getFornavn());
@@ -270,7 +257,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()) {
             do {
-                Venn venn = getVenn(cursor.getInt(1));
+                Venn venn = hentVenn(cursor.getInt(1));
                 venner.add(venn);
 
             }while (cursor.moveToNext());
@@ -358,7 +345,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public Restaurant getRestaurant(int ID){
+    public Restaurant hentRestaurant(int ID){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.query(TABLE_RESTAURANT,
                 new String[] { ID_RESTAURANT, NAVN_RESTAURANT, ADRESSE_RESTAURANT, TELEFONNR_RESTAURANT, TYPE_RESTAURANT }, ID_RESTAURANT + " = ?",
@@ -378,7 +365,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return null;
     }
 
-    public Venn getVenn(int ID){
+    public Venn hentVenn(int ID){
 
         SQLiteDatabase db = this.getWritableDatabase();
       Cursor cursor = db.query(TABLE_VENN,
