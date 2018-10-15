@@ -92,8 +92,9 @@ public class RestaurantListeAdapter extends ArrayAdapter<Restaurant> {
                 Intent intent = new Intent(context, RestaurantAktivitet.class);
                 intent.putExtra("Id", restaurantArrayList.get(position).getID());
                 int id=restaurantArrayList.get(position).getID();
-                onDeleteConfirm(id);
-                notifyDataSetChanged();
+                onBekrefSlett(id, position);
+                //restaurantArrayList.remove(position);
+               notifyDataSetChanged();
                 }
         });
 
@@ -101,7 +102,7 @@ public class RestaurantListeAdapter extends ArrayAdapter<Restaurant> {
         return convertView;
     }
 
-    public void onDeleteConfirm(final int id){
+    public void onBekrefSlett(final int id, final int position) {
         AlertDialog.Builder builder;
         String message = context.getResources().getString(R.string.alert_restaurant_msg);//"Vil du virkelig avslutte spillet?";
         builder = new AlertDialog.Builder(context, R.style.AlertDialog);
@@ -111,25 +112,28 @@ public class RestaurantListeAdapter extends ArrayAdapter<Restaurant> {
         textView.setText(message);
         textView.setTextColor(context.getResources().getColor(R.color.red));
         textView.setTypeface(Typeface.DEFAULT_BOLD);
-        textView.setPadding(24,20,0,0);
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,22);
+        textView.setPadding(24, 20, 0, 0);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22);
         builder.setView(textView);
 
         builder
                 .setPositiveButton(R.string.ja, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                         databaseHjelper.slettRestaurant(id);
+                        databaseHjelper.slettRestaurant(id);
+                         restaurantArrayList.remove(position);
+                        Intent intent = new Intent(context, RestaurantAktivitet.class);
+                        context.startActivity(intent);
+                        ((RestaurantAktivitet)context).finish();
 
-                         Intent intent=new Intent(context,RestaurantAktivitet.class);
-                         context.startActivity(intent);
-                         }
+                    }
                 })
                 .setNegativeButton(R.string.nei, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(context, "NEI", Toast.LENGTH_LONG).show();
-                        }
+                    }
                 })
                 .show();
-        }
+    }
 
-}
+
+    }

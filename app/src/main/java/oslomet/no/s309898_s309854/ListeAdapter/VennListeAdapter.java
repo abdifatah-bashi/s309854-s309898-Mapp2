@@ -87,7 +87,7 @@ public class VennListeAdapter extends ArrayAdapter<Venn> {
                 Intent intent = new Intent(context, RestaurantAktivitet.class);
                 intent.putExtra("Id", vennerArrayList.get(position).getId());
                 int id= vennerArrayList.get(position).getId();
-                onDeleteConfirm(id);
+                onBekreftSlett(id, position);
                 notifyDataSetChanged();
             }
         });
@@ -96,7 +96,7 @@ public class VennListeAdapter extends ArrayAdapter<Venn> {
         return convertView;
     }
 
-    public void onDeleteConfirm(final int id){
+    public void onBekreftSlett(final int id, final int position){
 
         AlertDialog.Builder builder;
         String message = context.getResources().getString(R.string.alert_friend_msg);//"Vil du virkelig avslutte spillet?";
@@ -117,9 +117,10 @@ public class VennListeAdapter extends ArrayAdapter<Venn> {
                 .setPositiveButton(R.string.ja, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         databaseHjelper.slettVenn(id);
-
+                        vennerArrayList.remove(position);
                         Intent intent=new Intent(context,VennAktivitet.class);
                         context.startActivity(intent);
+                        ((VennAktivitet)context).finish();
                     }
                 })
                 .setNegativeButton(R.string.nei, new DialogInterface.OnClickListener() {
@@ -131,4 +132,8 @@ public class VennListeAdapter extends ArrayAdapter<Venn> {
                 })
                 .show();
     }
+
+
+
+
 }

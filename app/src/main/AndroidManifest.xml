@@ -28,10 +28,10 @@
         <activity
             android:name=".RestaurantAktivitet"
             android:parentActivityName=".MainActivity"
-            android:noHistory="true"/>
+           />
         <activity
             android:name=".VennAktivitet"
-            android:parentActivityName=".VennAktivitet" />
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".NyRestaurantAktivitet"
             android:parentActivityName=".RestaurantAktivitet" />
@@ -44,9 +44,12 @@
         <activity
             android:name=".RedigerVennAktivitet"
             android:parentActivityName=".VennAktivitet" />
-        <activity android:name=".BestillingAktivitet" />
-        <activity android:name=".InstillingAktivitet" />
-        <activity android:name=".NyBestillingAktivitet"></activity>
+        <activity android:name=".BestillingAktivitet"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".InstillingAktivitet"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".NyBestillingAktivitet"
+            android:parentActivityName=".BestillingAktivitet"></activity>
         <receiver android:name=".MyBroadcastReceiver">
             <intent-filter>
                 <action android:name="com.example.s309854_s309898.myBroadcastReceiver"
