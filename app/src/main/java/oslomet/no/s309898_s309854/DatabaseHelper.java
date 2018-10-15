@@ -349,12 +349,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void slettRestaurant(int id){
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_RESTAURANT, ID_RESTAURANT + " = ?", new String[] { String.valueOf(id) });
+        db.delete(TABLE_BESTILLING, RESTAURANT_ID + " = ?", new String[] { String.valueOf(id) });
+
         db.close();
     }
 
     public void slettVenn(int id){
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_VENN, ID_VENN + " = ?", new String[] { String.valueOf(id) });
+        db.delete(TABLE_BESTILLING_VENNER, VENN_ID + " = ?", new String[] {String.valueOf(id)});
         db.close();
     }
 
