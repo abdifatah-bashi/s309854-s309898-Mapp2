@@ -4,10 +4,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.renderscript.Sampler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +17,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import oslomet.no.s309898_s309854.DatabaseHelper;
+import oslomet.no.s309898_s309854.DatabaseHjelper;
 import oslomet.no.s309898_s309854.R;
 import oslomet.no.s309898_s309854.RedigerRestaurantAktivitet;
 import oslomet.no.s309898_s309854.RestaurantAktivitet;
@@ -31,24 +29,18 @@ public class RestaurantListeAdapter extends ArrayAdapter<Restaurant> {
     private Context context;
     private int resource;
     private ArrayList<Restaurant> restaurantArrayList;
-    RestaurantAktivitet restaurantAktivitet;
-
-    DatabaseHelper databaseHelper;
-
+    DatabaseHjelper databaseHjelper;
 
     /**
      * Holds variables in a View
      */
     private static class ViewHolder {
-        TextView restaurantName;
+        TextView restaurantNavn;
 
     }
-
-
     public RestaurantListeAdapter(Context context, int resource, ArrayList<Restaurant> restaurantArrayList) {
-
         super(context, resource, restaurantArrayList);
-        databaseHelper= new DatabaseHelper(context);
+        databaseHjelper = new DatabaseHjelper(context);
         this.restaurantArrayList = restaurantArrayList;
         this.context = context;
         this.resource = resource;
@@ -59,24 +51,16 @@ public class RestaurantListeAdapter extends ArrayAdapter<Restaurant> {
     public View getView(final int position, View convertView, ViewGroup parent) {
 
         String name = getItem(position).getNavn();
-       // Intent intent = new Intent(context, RestaurantAktivitet.class);
-        //intent.putExtra("Id", restaurantArrayList.get(position).getID());
-
-        //Create statistic object
         final Restaurant restaurant = new Restaurant(name);
-
-
-
         //ViewHolder object
         ViewHolder holder;
-
 
         if(convertView == null){
             LayoutInflater inflater = LayoutInflater.from(context);
             convertView = inflater.inflate(resource, parent, false);
             holder= new ViewHolder();
 
-            holder.restaurantName = convertView.findViewById(R.id.restaurantName);
+            holder.restaurantNavn = convertView.findViewById(R.id.restaurantName);
 
             convertView.setTag(holder);
         }
@@ -84,7 +68,7 @@ public class RestaurantListeAdapter extends ArrayAdapter<Restaurant> {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        // On edit
+        // Rediger
         ImageView editBtn = convertView.findViewById(R.id.edit_btn);
         editBtn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View vew){
@@ -101,7 +85,7 @@ public class RestaurantListeAdapter extends ArrayAdapter<Restaurant> {
             }
         });
 
-
+        // Slett
         ImageView deleteBtn = convertView.findViewById(R.id.delete_btn);
         deleteBtn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View vew){
@@ -109,25 +93,17 @@ public class RestaurantListeAdapter extends ArrayAdapter<Restaurant> {
                 intent.putExtra("Id", restaurantArrayList.get(position).getID());
                 int id=restaurantArrayList.get(position).getID();
                 onDeleteConfirm(id);
-
                 notifyDataSetChanged();
-
-
-            }
+                }
         });
 
-
-        holder.restaurantName.setText(restaurant.getNavn());
+        holder.restaurantNavn.setText(restaurant.getNavn());
         return convertView;
     }
 
     public void onDeleteConfirm(final int id){
-
-
         AlertDialog.Builder builder;
         String message = context.getResources().getString(R.string.alert_restaurant_msg);//"Vil du virkelig avslutte spillet?";
-        //String message = "\t" + getResources().getString(R.string.spillScore) + scoreString + getResources().getString(R.string.spillIgjen);
-
         builder = new AlertDialog.Builder(context, R.style.AlertDialog);
         builder.setCancelable(false);
         TextView textView = new TextView(context);
@@ -137,35 +113,23 @@ public class RestaurantListeAdapter extends ArrayAdapter<Restaurant> {
         textView.setTypeface(Typeface.DEFAULT_BOLD);
         textView.setPadding(24,20,0,0);
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,22);
-
         builder.setView(textView);
-
 
         builder
                 .setPositiveButton(R.string.ja, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                         databaseHelper.slettRestaurant(id);
+                         databaseHjelper.slettRestaurant(id);
 
                          Intent intent=new Intent(context,RestaurantAktivitet.class);
                          context.startActivity(intent);
-
-
-
-                    }
+                         }
                 })
                 .setNegativeButton(R.string.nei, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(context, "NEI", Toast.LENGTH_LONG).show();
-
-
-                    }
+                        }
                 })
                 .show();
-
-
-
-
-
-    }
+        }
 
 }

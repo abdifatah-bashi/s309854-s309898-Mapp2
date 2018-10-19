@@ -153,7 +153,7 @@
         android:background="@drawable/quitbutton"
         android:layout_below="@+id/tid_layout"
         android:text="Bestill"
-        android:onClick="addBestilling"
+        android:onClick="leggTilBestilling"
         android:textColor="#FFFFFF"
         android:textSize="30dp" />
 

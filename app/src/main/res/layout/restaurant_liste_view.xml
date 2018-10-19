@@ -31,9 +31,9 @@
         android:id="@+id/edit_btn"
         android:layout_width="15dp"
         android:layout_height="20dp"
-
         android:layout_weight="20.0"
-        app:srcCompat="@drawable/pencil" />
+        app:srcCompat="@drawable/pencil"
+        />
 
 
     <ImageView
@@ -41,7 +41,7 @@
         android:layout_width="15dp"
         android:layout_height="20dp"
         android:layout_weight="20.0"
-        android:onClick="slettRestaurant"
+        android:onClick="onSlettRestaurant"
         app:srcCompat="@drawable/remove" />
 
 

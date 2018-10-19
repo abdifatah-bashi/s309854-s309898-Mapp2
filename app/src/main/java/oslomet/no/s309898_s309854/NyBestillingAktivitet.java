@@ -2,8 +2,6 @@ package oslomet.no.s309898_s309854;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.ClipData;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -29,7 +27,6 @@ import java.util.Calendar;
 import java.util.List;
 
 import oslomet.no.s309898_s309854.modeller.Bestilling;
-import oslomet.no.s309898_s309854.modeller.Bestilling_Venner;
 import oslomet.no.s309898_s309854.modeller.Restaurant;
 import oslomet.no.s309898_s309854.modeller.Venn;
 
@@ -39,44 +36,41 @@ public class NyBestillingAktivitet extends AppCompatActivity {
     private Spinner spinner;
     private Button datoBtn;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
-DatabaseHelper databaseHelper;
+    DatabaseHjelper databaseHjelper;
 
     Button leggVennBtn;
-    Button bestill;
+    Button bestillBtn;
     TextView valgtVenner;
     boolean[] checkedItems;
-    ArrayList<Integer> venner_pos = new ArrayList<>();
+    ArrayList<Integer> vennerPosisjon = new ArrayList<>();
     ArrayList<String> venner;
-    ArrayList<Integer> f_e= new ArrayList<>();
-    String v_pos="";
+    ArrayList<Integer> vennerId = new ArrayList<>();
+    String vPos = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.aktivitet_ny_bestilling);
-        databaseHelper=new DatabaseHelper(this);
-        datoBtn =  findViewById(R.id.velg_dato);
+        databaseHjelper = new DatabaseHjelper(this);
+        datoBtn = findViewById(R.id.velg_dato);
         tidBtn = findViewById(R.id.velg_tid);
-        spinner= findViewById(R.id.spinner_restaurant);
+        spinner = findViewById(R.id.spinner_restaurant);
         spinner.getBackground().setColorFilter(getResources().getColor(R.color.red), PorterDuff.Mode.SRC_ATOP);
-        bestill =findViewById(R.id.bestillingBtn);
-
+        bestillBtn = findViewById(R.id.bestillingBtn);
 
         velgDato(datoBtn);
         visRestauranterDropDown(spinner);
-
         // Venn liste
-        final ArrayList<Venn> liste_venner = databaseHelper.hentAlleVenner();
-
-
+        final ArrayList<Venn> liste_venner = databaseHjelper.hentAlleVenner();
 
         venner = new ArrayList<>();
-        for (int i = 0; i <liste_venner.size() ; i++) {
-            f_e.add(liste_venner.get(i).getId());
+        for (int i = 0; i < liste_venner.size(); i++) {
+            vennerId.add(liste_venner.get(i).getId());
             venner.add(liste_venner.get(i).getFornavn() + " " + liste_venner.get(i).getEtternavn());
         }
-        Log.i("Test", Arrays.toString(f_e.toArray()));
+        Log.i("TestFe", Arrays.toString(vennerId.toArray()));
         CharSequence[] cs = venner.toArray(new CharSequence[venner.size()]);
-         visVennerDropDown(cs);
+        visVennerDropDown(cs);
 
         //Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -89,16 +83,9 @@ DatabaseHelper databaseHelper;
 
     }
 
-    public void visVennerDropDown(final CharSequence[] vennListe){
+    public void visVennerDropDown(final CharSequence[] vennListe) {
         leggVennBtn = (Button) findViewById(R.id.venner_label);
         valgtVenner = (TextView) findViewById(R.id.tvItemSelected);
-
-
-
-
-
-
-
         checkedItems = new boolean[vennListe.length];
 
         leggVennBtn.setOnClickListener(new View.OnClickListener() {
@@ -106,14 +93,14 @@ DatabaseHelper databaseHelper;
             public void onClick(View view) {
                 AlertDialog.Builder mBuilder = new AlertDialog.Builder(NyBestillingAktivitet.this, R.style.AlertDialog);
                 mBuilder.setTitle(R.string.dialog_title);
-                mBuilder.setMultiChoiceItems(vennListe , checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
+                mBuilder.setMultiChoiceItems(vennListe, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int position, boolean isChecked) {
-                        if(isChecked){
-                            venner_pos.add(position);
-                            Log.i("pos",String.valueOf(position));
-                        }else{
-                            venner_pos.remove((Integer.valueOf(position)));
+                        if (isChecked) {
+                            vennerPosisjon.add(position);
+                            Log.i("pos", String.valueOf(position));
+                        } else {
+                            vennerPosisjon.remove((Integer.valueOf(position)));
                         }
                     }
                 });
@@ -123,13 +110,13 @@ DatabaseHelper databaseHelper;
                 mBuilder.setPositiveButton(R.string.ok_label, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int which) {
-                        //String s = vennListe.toString();
-
                         String item = "";
-                        for (int i = 0; i < venner_pos.size(); i++) {
-                            item = item + vennListe[venner_pos.get(i)];
-                            v_pos += f_e.get(venner_pos.get(i));
-                            if (i != venner_pos.size() - 1) {
+                        for (int i = 0; i < vennerPosisjon.size(); i++) {
+                            item = item + vennListe[vennerPosisjon.get(i)];
+                            vPos += vennerId.get(vennerPosisjon.get(i));
+                            int id = vennerId.get(vennerPosisjon.get(i));
+                            Log.i("Id:", " " + id);
+                            if (i != vennerPosisjon.size() - 1) {
                                 item = item + ", ";
                             }
                         }
@@ -148,7 +135,6 @@ DatabaseHelper databaseHelper;
                 });
 
 
-
                 AlertDialog mDialog = mBuilder.create();
 
                 mDialog.show();
@@ -158,7 +144,7 @@ DatabaseHelper databaseHelper;
 
     }
 
-    public void velgDato(final Button datoBtn){
+    public void velgDato(final Button datoBtn) {
 
         datoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -213,12 +199,11 @@ DatabaseHelper databaseHelper;
     }
 
 
-    public void visRestauranterDropDown(final Spinner spinner){
-       // String[] restaurantList = new String[]{"Fridays ", "Der Peppern Gror","Gamle Rådhuset","Vulkan Fisk", "Fiskeriet Youngstorget"};
-        ArrayList<Restaurant> list_restauranter=databaseHelper.hentAlleRestauranter();
+    public void visRestauranterDropDown(final Spinner spinner) {
+        ArrayList<Restaurant> restaurantListe = databaseHjelper.hentAlleRestauranter();
         List<String> restauranter = new ArrayList<>();
 
-        for(Restaurant res:list_restauranter){
+        for (Restaurant res : restaurantListe) {
             restauranter.add(res.getNavn());
         }
 
@@ -233,13 +218,12 @@ DatabaseHelper databaseHelper;
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                try{
+                try {
 
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
 
                 }
-              //  Log.i("NR", spinner.getSelectedItem().toString());
             }
 
             @Override
@@ -250,32 +234,27 @@ DatabaseHelper databaseHelper;
     }
 
 
-    public void addBestilling(View v) {
-
-        int restaurant_id = databaseHelper.hentRestaurant(spinner.getSelectedItem().toString());
-
+    public void leggTilBestilling(View v) {
+        int restaurant_id = databaseHjelper.hentRestaurant(spinner.getSelectedItem().toString());
         Bestilling best = new Bestilling();
 
         best.setDato(datoBtn.getText().toString());
         best.setKlokkeslett(tidBtn.getText().toString());
         best.setRestaurant_id(restaurant_id);
-        databaseHelper.addBestilling(best);
+        databaseHjelper.leggTilBestilling(best);
 
-        int id = databaseHelper.getLastBestilling();
-       // Log.i("BVID", String.valueOf(id));
-            Bestilling bestilling = databaseHelper.getBestilling(id);
-            //Log.i("BBB", String.valueOf(bestilling.getId()));
-            String[] v_positions = v_pos.split("");
+        int id = databaseHjelper.hentSisteBestilling();
+        Bestilling bestilling = databaseHjelper.getBestilling(id);
+        String[] v_positions = vPos.split("");
 
-            for (int i = 1; i < v_positions.length; i++) {
-                Venn venn = databaseHelper.getVenn(Integer.valueOf(v_positions[i]));
-                databaseHelper.addVenn_Bestilling(bestilling, venn);
-            }
-            Intent i = new Intent(this, BestillingAktivitet.class);
-            startActivity(i);
-            finish();
-
+        for (int i = 1; i < v_positions.length; i++) {
+            Venn venn = databaseHjelper.hentVenn(Integer.valueOf(v_positions[i]));
+            databaseHjelper.leggTilVennBestilling(bestilling, venn);
         }
+        Intent i = new Intent(this, BestillingAktivitet.class);
+        startActivity(i);
+        finish();
 
+    }
 
 }

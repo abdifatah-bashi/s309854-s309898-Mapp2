@@ -49,7 +49,7 @@ public class InstillingAktivitet extends AppCompatActivity {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newObject) {
                     Intent i = new Intent();
-                    i.setAction("com.example.hussain.s305358_s305371.myBroadcastReceiver");
+                    i.setAction("com.example.s309854_s309898.myBroadcastReceiver");
                     getActivity().sendBroadcast(i);
                     return true;
                 }

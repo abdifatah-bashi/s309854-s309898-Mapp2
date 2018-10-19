@@ -17,11 +17,10 @@ import oslomet.no.s309898_s309854.modeller.Venn;
 
 public class VennAktivitet extends AppCompatActivity {
 
-
     Button addFriendBtn;
     ListView listView;
+    DatabaseHjelper databaseHjelper;
 
-    DatabaseHelper databaseHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,16 +33,11 @@ public class VennAktivitet extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        databaseHelper=new DatabaseHelper(this);
+        databaseHjelper =new DatabaseHjelper(this);
         addFriendBtn = findViewById(R.id.addFriendBtn);
 
         listView = findViewById(R.id.restListView);
-        ArrayList<Venn> venner = new ArrayList<>();
-       /* venner.add(new Venn("Monica", "Galer ", "45454545"));
-        venner.add(new Venn("Chandler", "Bing ", "45454545"));
-        venner.add(new Venn("Ross", "Galer ", "45454545"));
-*/
-       venner = (ArrayList)databaseHelper.hentAlleVenner();
+        ArrayList<Venn> venner =databaseHjelper.hentAlleVenner();
 
         VennListeAdapter adapter = new VennListeAdapter(this, R.layout.venn_liste_view, venner);
         listView.setAdapter(adapter);
