@@ -77,9 +77,10 @@ public class BestillingListeAdapter extends ArrayAdapter<Bestilling> {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.restaurantNavn.setText("Restaurant: " + restaurantNavn);
-        holder.tid.setText("Tid: " + tid);
-        holder.venner.setText("Venner: \n" + toString(vennNavn));
+
+        holder.restaurantNavn.setText("Restaurant    : " + restaurantNavn);
+        holder.tid.setText("Tid                  : " + tid);
+        holder.venner.setText("Venner           : \n" + toString(vennNavn));
         return convertView;
         }
 

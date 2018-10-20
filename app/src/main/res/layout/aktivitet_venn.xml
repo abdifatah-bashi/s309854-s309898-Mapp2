@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#dcc8a1"
     tools:context=".VennAktivitet">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
+        android:background="#870203"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        app:popupTheme="@style/AppTheme"
-        />
+        app:popupTheme="@style/AppTheme" />
 
     <ListView
         android:id="@+id/restListView"
@@ -29,11 +29,11 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_gravity="bottom|right"
-        android:onClick="onFriendAdd"
-
         android:layout_marginBottom="0dp"
+
         android:layout_marginEnd="11dp"
         android:background="@drawable/round_add_btn"
+        android:onClick="onFriendAdd"
         android:text="@string/pluss"
         android:textColor="@android:color/white"
         android:textSize="30dp" />

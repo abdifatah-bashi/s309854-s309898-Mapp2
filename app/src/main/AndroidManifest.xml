@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="oslomet.no.s309898_s309854">
-    <uses-permission android:name="oslomet.no.s309898_s309854.permission"/>
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="oslomet.no.s309898_s309854.permission"/>
     <permission android:name="oslomet.no.s309898_s309854.permission"/>
+
+    <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
@@ -28,10 +30,10 @@
         <activity
             android:name=".RestaurantAktivitet"
             android:parentActivityName=".MainActivity"
-            android:noHistory="true"/>
+            />
         <activity
             android:name=".VennAktivitet"
-            android:parentActivityName=".VennAktivitet" />
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".NyRestaurantAktivitet"
             android:parentActivityName=".RestaurantAktivitet" />
@@ -44,9 +46,14 @@
         <activity
             android:name=".RedigerVennAktivitet"
             android:parentActivityName=".VennAktivitet" />
-        <activity android:name=".BestillingAktivitet" />
-        <activity android:name=".InstillingAktivitet" />
-        <activity android:name=".NyBestillingAktivitet"></activity>
+        <activity android:name=".BestillingAktivitet"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".InstillingAktivitet"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".NyBestillingAktivitet"
+            android:parentActivityName=".BestillingAktivitet">
+
+        </activity>
         <receiver android:name=".MyBroadcastReceiver">
             <intent-filter>
                 <action android:name="com.example.s309854_s309898.myBroadcastReceiver"
@@ -55,9 +62,19 @@
             </intent-filter>
         </receiver>
 
+
         <service android:name=".PeriodiskService" />
         <service android:name=".SetService" />
         <service android:name=".MyService" />
+
+        <provider
+            android:name="oslomet.no.s309898_s309854.ReservasjonContentProvider"
+            android:authorities="oslomet.no.s309898_s309854"
+            android:enabled="true"
+            android:exported="true"
+            android:readPermission="oslomet.no.s309898_s309854.permission"
+            android:writePermission="oslomet.no.s309898_s309854.permission">
+        </provider>
     </application>
 
 </manifest>

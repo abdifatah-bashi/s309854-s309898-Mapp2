@@ -6,4 +6,5 @@
     android:textColor="@color/text_color"
     android:textSize="20sp"
     android:padding="10dp"
+
     />

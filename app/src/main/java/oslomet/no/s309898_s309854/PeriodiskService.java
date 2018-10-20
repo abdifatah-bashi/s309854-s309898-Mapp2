@@ -9,19 +9,11 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
-import android.telephony.SmsManager;
 import android.util.Log;
-
 import java.util.Calendar;
-import java.util.List;
-import oslomet.no.s309898_s309854.modeller.Bestilling;
-import oslomet.no.s309898_s309854.modeller.Venn;
-
 
 public class PeriodiskService extends Service {
 

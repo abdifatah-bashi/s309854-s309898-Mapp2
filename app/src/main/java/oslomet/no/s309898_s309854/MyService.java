@@ -13,6 +13,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.telephony.SmsManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.List;
@@ -55,9 +56,9 @@ public class MyService extends Service {
 
                     Log.i("Sender sms til: " , vennn.getTelefon());
                     Log.i("MeldingInnhold:" , melding);
-
                     SmsManager smsManager = SmsManager.getDefault();
                     smsManager.sendTextMessage(telefon, null, melding, null, null);
+                    Toast.makeText(this, "Sms påminnelse ble sendt til venner", Toast.LENGTH_LONG).show();
                 }
 
 

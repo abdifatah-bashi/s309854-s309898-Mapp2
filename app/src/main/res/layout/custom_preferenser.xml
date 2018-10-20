@@ -6,7 +6,8 @@
     android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
     android:paddingStart="?android:attr/listPreferredItemPaddingStart"
     android:paddingTop="6dp"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="#dcc8a1">
 
     <TextView android:id="@android:id/title"
         android:layout_width="match_parent"

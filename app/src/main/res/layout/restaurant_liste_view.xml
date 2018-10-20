@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="5dp"
+    android:background="#dcc8a1"
+    android:orientation="horizontal"
     android:paddingBottom="5dp"
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
-    android:orientation="horizontal"
-    android:weightSum="100"
-    >
+    android:paddingTop="5dp"
+    android:weightSum="100">
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/restaurantName"
@@ -23,27 +23,21 @@
         />
 
 
-
-
-
-
     <ImageView
         android:id="@+id/edit_btn"
-        android:layout_width="15dp"
-        android:layout_height="20dp"
+        android:layout_width="20dp"
+        android:layout_height="30dp"
         android:layout_weight="20.0"
-        app:srcCompat="@drawable/pencil"
-        />
+        app:srcCompat="@drawable/edit" />
 
 
     <ImageView
         android:id="@+id/delete_btn"
-        android:layout_width="15dp"
-        android:layout_height="20dp"
+        android:layout_width="20dp"
+        android:layout_height="30dp"
         android:layout_weight="20.0"
         android:onClick="onSlettRestaurant"
-        app:srcCompat="@drawable/remove" />
-
+        app:srcCompat="@drawable/slett" />
 
 
 </LinearLayout>
