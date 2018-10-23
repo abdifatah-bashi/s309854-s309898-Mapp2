@@ -67,14 +67,6 @@
         <service android:name=".SetService" />
         <service android:name=".MyService" />
 
-        <provider
-            android:name="oslomet.no.s309898_s309854.ReservasjonContentProvider"
-            android:authorities="oslomet.no.s309898_s309854"
-            android:enabled="true"
-            android:exported="true"
-            android:readPermission="oslomet.no.s309898_s309854.permission"
-            android:writePermission="oslomet.no.s309898_s309854.permission">
-        </provider>
     </application>
 
 </manifest>
