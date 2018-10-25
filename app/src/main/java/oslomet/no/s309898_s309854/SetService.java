@@ -23,12 +23,12 @@ public class SetService extends Service {
     }
 
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId){
+    public int onStartCommand(Intent intent, int flags, int startId) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         boolean serviceOn = sharedPreferences.getBoolean("switch_on_off", true);
         String melding = sharedPreferences.getString("endre_melding", "");
 
-        if(!serviceOn){
+        if (!serviceOn) {
             /* TODO: STOPPE SMS-UTSENDELSE TJENESTEN */
             Intent i = new Intent(this, PeriodiskService.class);
             PendingIntent pendingIntent = PendingIntent.getService(this, 0, i, 0);
@@ -42,7 +42,7 @@ public class SetService extends Service {
         String[] parts = time.split(":");
         int hour = Integer.parseInt(parts[0]);
         int minute = Integer.parseInt(parts[1]);
-        Log.i("smsUtsTid: ",  + hour + ":" + minute);
+        Log.i("smsUtsTid: ", +hour + ":" + minute);
         Log.i("melding: ", melding);
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, hour);
@@ -54,7 +54,7 @@ public class SetService extends Service {
         PendingIntent pendingIntent = PendingIntent.getService(this, 0, i, 0);
 
         /* TODO: KjØRER KODE I KLASSEN MYSERVICE HVER DAG PÅ DET GITTE TIDSPUNKTET */
-        Log.i("Kalanderen er nå: ",  " " + calendar);
+        Log.i("Kalanderen er nå: ", " " + calendar);
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
 

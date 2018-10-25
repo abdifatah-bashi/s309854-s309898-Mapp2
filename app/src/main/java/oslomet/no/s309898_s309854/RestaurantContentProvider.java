@@ -59,10 +59,13 @@ public class RestaurantContentProvider extends ContentProvider {
     @Nullable
     @Override
     public String getType(@NonNull Uri uri) {
-        switch (uriMatcher.match(uri)){
-            case MRESTAURANT: return "vnd.android.cursor.dir/vnd.example.restaurant";
-            case RESTAURANT: return "vnd.android.cursor.item/vnd.example.restaurant";
-            default: throw new IllegalArgumentException("Invalid URI " + uri);
+        switch (uriMatcher.match(uri)) {
+            case MRESTAURANT:
+                return "vnd.android.cursor.dir/vnd.example.restaurant";
+            case RESTAURANT:
+                return "vnd.android.cursor.item/vnd.example.restaurant";
+            default:
+                throw new IllegalArgumentException("Invalid URI " + uri);
         }
     }
 

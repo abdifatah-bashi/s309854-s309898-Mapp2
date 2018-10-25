@@ -20,6 +20,7 @@ public class RedigerRestaurantAktivitet extends AppCompatActivity {
     EditText telefon;
     EditText type;
     DatabaseHjelper databaseHjelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +59,7 @@ public class RedigerRestaurantAktivitet extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
 
             case R.id.save:
 
@@ -70,13 +71,13 @@ public class RedigerRestaurantAktivitet extends AppCompatActivity {
 
                 int ID;
                 Restaurant restaurant;
-                    ID = getIntent().getIntExtra("Id", -1);
-                    restaurant = databaseHjelper.hentRestaurant(ID);
-                    restaurant.setNavn(navn_res_Edit);
-                    restaurant.setAdresse(adress_res_Edit);
-                    restaurant.setTelefon(telefon_res_Edit);
-                    restaurant.setType(type_res_Edit);
-                    databaseHjelper.oppdaterRestaurant(restaurant);
+                ID = getIntent().getIntExtra("Id", -1);
+                restaurant = databaseHjelper.hentRestaurant(ID);
+                restaurant.setNavn(navn_res_Edit);
+                restaurant.setAdresse(adress_res_Edit);
+                restaurant.setTelefon(telefon_res_Edit);
+                restaurant.setType(type_res_Edit);
+                databaseHjelper.oppdaterRestaurant(restaurant);
 
 
                 Intent i = new Intent(this, RestaurantAktivitet.class);
@@ -86,7 +87,6 @@ public class RedigerRestaurantAktivitet extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 
 
 }

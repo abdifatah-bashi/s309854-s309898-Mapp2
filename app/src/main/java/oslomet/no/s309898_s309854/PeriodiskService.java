@@ -13,6 +13,7 @@ import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.util.Log;
+
 import java.util.Calendar;
 
 public class PeriodiskService extends Service {
@@ -26,7 +27,7 @@ public class PeriodiskService extends Service {
     }
 
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId){
+    public int onStartCommand(Intent intent, int flags, int startId) {
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         boolean serviceOn = sharedPreferences.getBoolean("switch_on_off", true);
@@ -37,7 +38,7 @@ public class PeriodiskService extends Service {
         String[] parts = time.split(":");
         int hour = Integer.parseInt(parts[0]);
         int minute = Integer.parseInt(parts[1]);
-        Log.i("smsUtsTid: ",  + hour + ":" + minute);
+        Log.i("smsUtsTid: ", +hour + ":" + minute);
         Log.i("melding: ", melding);
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, hour);

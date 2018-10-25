@@ -5,11 +5,12 @@ public class Bestilling_Venner {
     private int B_Id;
     private int V_Id;
 
-    public Bestilling_Venner(){}
+    public Bestilling_Venner() {
+    }
 
-    Bestilling_Venner(int b_id, int v_id){
-        this.B_Id=b_id;
-        this.V_Id=v_id;
+    Bestilling_Venner(int b_id, int v_id) {
+        this.B_Id = b_id;
+        this.V_Id = v_id;
     }
 
 

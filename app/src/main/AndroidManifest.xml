@@ -54,6 +54,16 @@
             android:parentActivityName=".BestillingAktivitet">
 
         </activity>
+
+        <provider
+            android:name=".RestaurantContentProvider"
+            android:authorities="oslomet.no.s309898_s309854"
+            android:enabled="true"
+            android:exported="true"
+            android:readPermission="oslomet.no.s309898_s309854.permission"
+            android:writePermission="oslomet.no.s309898_s309854.permission">
+        </provider>
+
         <receiver android:name=".MyBroadcastReceiver">
             <intent-filter>
                 <action android:name="com.example.s309854_s309898.myBroadcastReceiver"

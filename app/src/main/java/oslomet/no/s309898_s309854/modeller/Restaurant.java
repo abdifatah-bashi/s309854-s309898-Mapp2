@@ -7,10 +7,11 @@ public class Restaurant {
     String telefon;
     String type;
 
-    public Restaurant(){}
+    public Restaurant() {
+    }
 
     public Restaurant(int ID, String navn, String adresse, String telefon, String type) {
-        this.ID=ID;
+        this.ID = ID;
         this.navn = navn;
         this.adresse = adresse;
         this.telefon = telefon;
@@ -28,7 +29,7 @@ public class Restaurant {
         this.navn = navn;
     }
 
-    public void setID(int ID){
+    public void setID(int ID) {
         this.ID = ID;
     }
 
@@ -48,7 +49,7 @@ public class Restaurant {
         this.type = type;
     }
 
-    public int getID(){
+    public int getID() {
         return ID;
     }
 

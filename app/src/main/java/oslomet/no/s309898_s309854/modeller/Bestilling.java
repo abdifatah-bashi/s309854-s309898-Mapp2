@@ -9,9 +9,11 @@ public class Bestilling {
     private String klokkeslett;
     private int restaurant_id;
 
-    public Bestilling(){}
-    public Bestilling(int id,String dato, String klokkeslett, int restaurant_id) {
-        this.Id=id;
+    public Bestilling() {
+    }
+
+    public Bestilling(int id, String dato, String klokkeslett, int restaurant_id) {
+        this.Id = id;
         this.dato = dato;
         this.klokkeslett = klokkeslett;
         this.restaurant_id = restaurant_id;
@@ -33,7 +35,9 @@ public class Bestilling {
         this.restaurant_id = rest_id;
     }
 
-   public void setKlokkeslett(String klokkeslett) {this.klokkeslett = klokkeslett;}
+    public void setKlokkeslett(String klokkeslett) {
+        this.klokkeslett = klokkeslett;
+    }
 
     public void setDato(String dato) {
         this.dato = dato;
@@ -51,7 +55,11 @@ public class Bestilling {
         return klokkeslett;
     }
 
-    public int getRestaurant_id() { return restaurant_id; }
+    public int getRestaurant_id() {
+        return restaurant_id;
+    }
 
-    public void setRestaurant_id(int restaurant_id) { this.restaurant_id = restaurant_id; }
+    public void setRestaurant_id(int restaurant_id) {
+        this.restaurant_id = restaurant_id;
+    }
 }

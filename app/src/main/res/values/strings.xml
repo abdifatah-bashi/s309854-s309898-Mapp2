@@ -4,32 +4,13 @@
     <string name="alert_restaurant_msg">Vil du slette restauranten?</string>
     <string name="alert_friend_msg">Vil du slette vennen?</string>
 
-
-    <string name="action_settings">Settings</string>
-    <string name="time_picker_example">Time Picker Example</string>
-    <string name="time_pick">Pick the time and press save button</string>
-    <string name="time_save">Save</string>
-    <string name="time_selected"></string>
-    <string name="time_current">The Time is:</string>
-
     <string name="dialog_title">Venner som skal bli med</string>
     <string name="ok_label">Velg</string>
     <string name="dismiss_label">Avbryt</string>
     <string name="velg_venner">Velg venner</string>
-
-
-    <string name="studenter">Studenter</string>
     <string name="endreMelding">Endre melding</string>
     <string name="skrivMelding">Ny melding</string>
     <string name="dialog_endre_melding">Skriv inn ny standard melding:</string>
-
-    <string name="endre_melding_til_alle_studenter">Endre meldingen til alle valgte studenter:</string>
-
-    <string name="endreStudent">Endre student</string>
-    <string name="listeMelding">Alle meldinger</string>
-    <string name="listInnstillinger">Innstillinger</string>
-
-    <string name="nyStudent">Legg til en ny student</string>
 
     <string name="label_fornavn">Fornavn:</string>
     <string name="label_etternavn">Etternavn:</string>
@@ -37,24 +18,19 @@
     <string name="label_melding">Melding:</string>
     <string name="label_tidspunkt">Tidspunkt:</string>
     <string name="leggTil">Legg til</string>
-    <string name="student_lagtTil">ble lagt til!</string>
+
 
     <string name="oppdater">Oppdaterer..</string>
-
-
     <string name="avsluttTekst">Avslutt</string>
     <string name="bekAvslutt">Vil du avslutte?</string>
     <string name="textNei">Nei</string>
     <string name="textJa">Ja</string>
-    <string name="velg_kontakter">Velg student</string>
-    <string name="textValgteStudenter">Valgte studenter:</string>
+    <string name="avbryt">Avbryt</string>
     <string name="meldingen">Melding:</string>
     <string name="lagreMelding">Lagre melding</string>
     <string name="velgTidspunkt">Velg tidspunkt</string>
-    <string name="lagtInn">Meldingen er lagt til i databasen</string>
 
-
-    <!-- ............... XML for Endre/Ny melding aktiviteten ............ -->
+    <!-- ............... Bestilling ............ -->
 
     <string name="choose_receiver">Velg venner</string>
     <string name="lagre">Lagre</string>
@@ -62,52 +38,19 @@
     <string name="ok">Ok</string>
     <string name="chosen_contacts_label">Valgte venner:</string>
 
-    <!-- Validation messages Add new friend and message -->
-    <string name="fornavn_error_melding">Fornavn må fylles inn og kan ikke inneholde tall!</string>
-    <string name="etternavn_error_melding">Etternavn må fylles inn og kan ikke inneholde tall!</string>
-    <string name="telefon_error_melding">Telefonnr må være minst 8 siffer!</string>
-    <string name="melding_error_melding">Melding må skrives!</string>
-    <string name="tid_error_melding">Tidspunkt må velges!</string>
-    <string name="dato_error_melding">Dato må velges!</string>
 
-    <!-- Edit contact -->
-    <string name="avbryt">Avbryt</string>
-    <string name="tilbake">Tilbake</string>
-    <string name="slett">Slett</string>
-    <string name="slett_id_error_varsel">Det oppstod en feil! Studenten ble ikke slettet!</string>
-    <string name="person_slettet_melding">ble slettet!</string>
-    <string name="person_endret_varsel">s informasjon er endret!</string>
-    <string name="id_endret_feil_varsel">Feil! Informasjon om studentet ble ikke endret!</string>
-    <string name="ja">Ja</string>
-    <string name="nei">Nei</string>
-    <string name="slett_varsel">Vil du slette denne studenten?</string>
-    <string name="slett_bekreft">Slett student</string>
-
-
-    <!-- Settings -->
+    <!-- Instilling -->
     <string name="change_time_title">Tidspunkt for SMS-utsendelse</string>
     <string name="change_default_message_title">Standard SMS-tekst</string>
     <string name="turn_app_on_off_title">SMS-utsendelse</string>
     <string name="time_picker_dialog_summary">Sett tidspunkt</string>
     <string name="set">Sett</string>
 
-    <!-- Result of notification -->
+    <!-- Notifikasjon -->
     <string name="notification_title">Bestilling påminnelse</string>
     <string name="notification_message">Melding sendt!</string>
     <string name="result_class_title">SMS sendt</string>
 
 
-    <string-array name="shopping_item">
-        <item>Onion</item>
-        <item>Sausage</item>
-        <item>Milk</item>
-        <item>Garlic</item>
-        <item>Beef</item>
-        <item>Veggies</item>
-        <item>Olive</item>
-        <item>Cheese</item>
-        <item>Tuna</item>
-        <item>Mushrooms</item>
-    </string-array>
 
 </resources>

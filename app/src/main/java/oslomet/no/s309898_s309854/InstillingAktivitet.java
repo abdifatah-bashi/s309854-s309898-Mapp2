@@ -6,9 +6,10 @@ import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.SwitchPreference;
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+
+import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
 
 public class InstillingAktivitet extends AppCompatActivity {
@@ -22,12 +23,11 @@ public class InstillingAktivitet extends AppCompatActivity {
         getFragmentManager().beginTransaction().replace(android.R.id.content, new PrefFragment()).commit();
 
 
-
     }
 
-    public static class PrefFragment extends PreferenceFragment{
+    public static class PrefFragment extends PreferenceFragment {
         @Override
-        public void onCreate(Bundle savedInstanceState){
+        public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.preferenser);
 

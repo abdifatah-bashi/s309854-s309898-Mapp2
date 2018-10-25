@@ -38,6 +38,7 @@ public class RestaurantListeAdapter extends ArrayAdapter<Restaurant> {
         TextView restaurantNavn;
 
     }
+
     public RestaurantListeAdapter(Context context, int resource, ArrayList<Restaurant> restaurantArrayList) {
         super(context, resource, restaurantArrayList);
         databaseHjelper = new DatabaseHjelper(context);
@@ -55,23 +56,22 @@ public class RestaurantListeAdapter extends ArrayAdapter<Restaurant> {
         //ViewHolder object
         ViewHolder holder;
 
-        if(convertView == null){
+        if (convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(context);
             convertView = inflater.inflate(resource, parent, false);
-            holder= new ViewHolder();
+            holder = new ViewHolder();
 
             holder.restaurantNavn = convertView.findViewById(R.id.restaurantName);
 
             convertView.setTag(holder);
-        }
-        else{
+        } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
         // Rediger
         ImageView editBtn = convertView.findViewById(R.id.edit_btn);
-        editBtn.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View vew){
+        editBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View vew) {
                 Intent intent = new Intent(context, RedigerRestaurantAktivitet.class);
                 intent.putExtra("Id", restaurantArrayList.get(position).getID());
                 intent.putExtra("navn", restaurantArrayList.get(position).getNavn());
@@ -87,15 +87,15 @@ public class RestaurantListeAdapter extends ArrayAdapter<Restaurant> {
 
         // Slett
         ImageView deleteBtn = convertView.findViewById(R.id.delete_btn);
-        deleteBtn.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View vew){
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View vew) {
                 Intent intent = new Intent(context, RestaurantAktivitet.class);
                 intent.putExtra("Id", restaurantArrayList.get(position).getID());
-                int id=restaurantArrayList.get(position).getID();
+                int id = restaurantArrayList.get(position).getID();
                 onBekrefSlett(id, position);
                 //restaurantArrayList.remove(position);
-               notifyDataSetChanged();
-                }
+                notifyDataSetChanged();
+            }
         });
 
         holder.restaurantNavn.setText(restaurant.getNavn());
@@ -117,17 +117,17 @@ public class RestaurantListeAdapter extends ArrayAdapter<Restaurant> {
         builder.setView(textView);
 
         builder
-                .setPositiveButton(R.string.ja, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.textJa, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         databaseHjelper.slettRestaurant(id);
-                         restaurantArrayList.remove(position);
+                        restaurantArrayList.remove(position);
                         Intent intent = new Intent(context, RestaurantAktivitet.class);
                         context.startActivity(intent);
-                        ((RestaurantAktivitet)context).finish();
+                        ((RestaurantAktivitet) context).finish();
 
                     }
                 })
-                .setNegativeButton(R.string.nei, new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.textNei, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(context, "NEI", Toast.LENGTH_LONG).show();
                     }
@@ -136,4 +136,4 @@ public class RestaurantListeAdapter extends ArrayAdapter<Restaurant> {
     }
 
 
-    }
+}

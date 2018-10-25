@@ -82,7 +82,7 @@ public class BestillingListeAdapter extends ArrayAdapter<Bestilling> {
         holder.tid.setText("Tid                  : " + tid);
         holder.venner.setText("Venner           : \n" + toString(vennNavn));
         return convertView;
-        }
+    }
 
     // Hjelp metoder
     public String toString(List<String> venner) {
