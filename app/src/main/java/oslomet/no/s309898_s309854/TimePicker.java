@@ -31,6 +31,14 @@ public class TimePicker extends DialogPreference {
         return Integer.parseInt(pieces[1]);
     }
 
+    public TimePicker(Context context) {
+        this(context, null);
+    }
+
+    public TimePicker(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
+
     public TimePicker(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         setDialogTitle("");
@@ -103,10 +111,12 @@ public class TimePicker extends DialogPreference {
         if (restorePersistedValue) {
             if (defaultValue == null) {
                 time = getPersistedString(DEFAULT_VALUE);
-            } else {
+            }
+            else {
                 time = getPersistedString(DEFAULT_VALUE);
             }
-        } else {
+        }
+        else {
             time = defaultValue.toString();
         }
 
@@ -121,14 +131,14 @@ public class TimePicker extends DialogPreference {
         try {
             DateFormat inTimeFormat = new SimpleDateFormat("HH:mm", Locale.US);
             return inTimeFormat.parse(inTime);
-        } catch (ParseException e) {
+        } catch(ParseException e) {
             return null;
         }
     }
 
     public static String time24(String inTime) {
         Date inDate = toDate(inTime);
-        if (inDate != null) {
+        if(inDate != null) {
             DateFormat outTimeFormat = new SimpleDateFormat("HH:mm", Locale.US);
             return outTimeFormat.format(inDate);
         } else {
@@ -136,4 +146,3 @@ public class TimePicker extends DialogPreference {
         }
     }
 }
-
